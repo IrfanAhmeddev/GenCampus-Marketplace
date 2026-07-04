@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace | GenCampus</title>
+    <link rel="stylesheet" href="../css/products.css">
+</head>
+<body>
+
+    <header class="gc-header">
+        <div class="gc-brand">
+            <h1>GenCampus Marketplace</h1>
+            <p>Buy and Sell within your Campus Community</p>
+        </div>
+    </header>
+
+    <section class="gc-filters">
+        <div class="search-wrapper">
+            <span>🔍</span>
+            <input type="text" id="searchInput" placeholder="Search products, brands, and categories...">
+        </div>
+
+        <select id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="Books">Books</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Accessories">Accessories</option>
+        </select>
+
+        <div class="price-filter">
+            <input type="number" id="minPrice" placeholder="Min ₹">
+            <span class="price-separator">to</span>
+            <input type="number" id="maxPrice" placeholder="Max ₹">
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="products-grid" id="productsGrid">
+
+            <div class="product-card">
+                <div class="image-container">
+                    <div class="badge-container">
+                        <span class="category">Books</span>
+                        <span class="status available">Available</span>
+                    </div>
+                    <img src="../assets/laptop.jpg" alt="Engineering Physics Book">
+                </div>
+                <div class="product-info">
+                    <h3>Engineering Physics Volume I (Latest Edition)</h3>
+                    
+                    <div class="rating-row">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(12)</span>
+                    </div>
+
+                    <div class="price-row">
+                        <span class="price">₹450</span>
+                        <span class="original-price">₹700</span>
+                    </div>
+
+                    <button class="btn-action">View Details</button>
+                </div>
+            </div>
+
+            <div class="product-card is-sold">
+                <div class="image-container">
+                    <div class="badge-container">
+                        <span class="category">Electronics</span>
+                        <span class="status sold">Sold Out</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&auto=format&fit=crop" alt="Dell Laptop">
+                </div>
+                <div class="product-info">
+                    <h3>Dell Inspiron 15 Core i5 - 8GB RAM</h3>
+                    
+                    <div class="rating-row">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(4)</span>
+                    </div>
+
+                    <div class="price-row">
+                        <span class="price">₹25,000</span>
+                    </div>
+
+                    <button class="btn-action" disabled>Out of Stock</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/products.js"></script>
+</body>
+</html>

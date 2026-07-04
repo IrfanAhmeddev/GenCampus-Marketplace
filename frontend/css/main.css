@@ -1,0 +1,107 @@
+/* ==========================================
+   GenCampus Marketplace
+   Global Styles
+========================================== */
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* CSS Variables */
+:root{
+
+    /* Brand Colors */
+    --primary:#4F46E5;
+    --primary-dark:#4338CA;
+
+    /* Status Colors */
+    --success:#10B981;
+    --danger:#EF4444;
+    --warning:#F59E0B;
+
+    /* Backgrounds */
+    --background:#F9FAFB;
+    --surface:#FFFFFF;
+
+    /* Text */
+    --text:#111827;
+    --text-light:#6B7280;
+
+    /* Borders */
+    --border:#E5E7EB;
+
+    /* Border Radius */
+    --radius:8px;
+
+    /* Shadow */
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+/* Reset */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+/* Body */
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    line-height:1.6;
+
+}
+
+/* Images */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+/* Links */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+/* Buttons */
+
+button{
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+}
+
+/* Inputs */
+
+input,
+select,
+textarea,
+button{
+
+    outline:none;
+
+    font-family:inherit;
+
+}

@@ -1,0 +1,326 @@
+/* ==========================================
+   GenCampus Marketplace
+   Reusable UI Components
+========================================== */
+
+/* ==========================
+Buttons
+========================== */
+
+.gc-btn{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:var(--radius);
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.gc-btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.gc-btn-primary:hover{
+
+    background:var(--primary-dark);
+
+}
+
+.gc-btn-secondary{
+
+    background:#E5E7EB;
+
+    color:var(--text);
+
+}
+
+.gc-btn-secondary:hover{
+
+    background:#D1D5DB;
+
+}
+
+.gc-btn-danger{
+
+    background:var(--danger);
+
+    color:white;
+
+}
+
+.gc-btn-success{
+
+    background:var(--success);
+
+    color:white;
+
+}
+
+/* ==========================
+Cards
+========================== */
+
+.gc-card{
+
+    background:var(--surface);
+
+    border-radius:12px;
+
+    box-shadow:var(--shadow);
+
+    padding:20px;
+
+}
+
+/* ==========================
+Inputs
+========================== */
+
+.gc-input,
+.gc-select,
+.gc-textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+.gc-input:focus,
+.gc-select:focus,
+.gc-textarea:focus{
+
+    border-color:var(--primary);
+
+}
+
+/* ==========================
+Badges
+========================== */
+
+.gc-badge{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.gc-badge-success{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.gc-badge-danger{
+
+    background:#FEE2E2;
+
+    color:#B91C1C;
+
+}
+
+.gc-badge-warning{
+
+    background:#FEF3C7;
+
+    color:#B45309;
+
+}
+
+/* ==========================
+Navbar
+========================== */
+
+.gc-navbar{
+
+    background:white;
+
+    box-shadow:var(--shadow);
+
+    padding:15px 30px;
+
+}
+
+.gc-navbar-content{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.gc-logo{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.gc-nav-links{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.gc-nav-links a{
+
+    color:var(--text);
+
+    font-weight:500;
+
+}
+
+.gc-nav-links a:hover{
+
+    color:var(--primary);
+
+}
+
+/* ==========================
+Spinner
+========================== */
+
+.gc-spinner{
+
+    width:40px;
+
+    height:40px;
+
+    border:4px solid #E5E7EB;
+
+    border-top:4px solid var(--primary);
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+from{
+
+transform:rotate(0deg);
+
+}
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+/* ==========================
+Alert
+========================== */
+
+.gc-alert{
+
+    padding:15px;
+
+    border-radius:8px;
+
+    margin:15px 0;
+
+}
+
+.gc-alert-success{
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+}
+
+.gc-alert-error{
+
+    background:#FEE2E2;
+
+    color:#991B1B;
+
+}
+
+.gc-alert-warning{
+
+    background:#FEF3C7;
+
+    color:#92400E;
+
+}
+
+/* ==========================
+Modal
+========================== */
+
+.gc-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.gc-modal-content{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    width:90%;
+
+    max-width:500px;
+
+}

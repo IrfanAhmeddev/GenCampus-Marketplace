@@ -1,0 +1,177 @@
+/* ==========================================
+   GenCampus Marketplace
+   Layout Styles
+========================================== */
+
+/* ==========================
+Container
+========================== */
+
+.gc-container{
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:0 auto;
+
+    padding:20px;
+
+}
+
+/* ==========================
+Section
+========================== */
+
+.gc-section{
+
+    padding:40px 20px;
+
+}
+
+/* ==========================
+Grid System
+========================== */
+
+.gc-grid{
+
+    display:grid;
+
+    gap:20px;
+
+}
+
+.gc-grid-2{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+.gc-grid-3{
+
+    grid-template-columns:repeat(3,1fr);
+
+}
+
+.gc-grid-4{
+
+    grid-template-columns:repeat(4,1fr);
+
+}
+
+/* ==========================
+Flex Utilities
+========================== */
+
+.gc-flex{
+
+    display:flex;
+
+}
+
+.gc-flex-center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.gc-flex-between{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.gc-flex-column{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* ==========================
+Spacing Utilities
+========================== */
+
+.mt-1{margin-top:10px;}
+.mt-2{margin-top:20px;}
+.mt-3{margin-top:30px;}
+.mt-4{margin-top:40px;}
+
+.mb-1{margin-bottom:10px;}
+.mb-2{margin-bottom:20px;}
+.mb-3{margin-bottom:30px;}
+.mb-4{margin-bottom:40px;}
+
+.p-1{padding:10px;}
+.p-2{padding:20px;}
+.p-3{padding:30px;}
+.p-4{padding:40px;}
+
+/* ==========================
+Width Utilities
+========================== */
+
+.w-100{
+
+    width:100%;
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+/* ==========================
+Responsive
+========================== */
+
+@media(max-width:992px){
+
+.gc-grid-4{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.gc-grid-3{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.gc-grid-2{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.gc-container{
+
+padding:15px;
+
+}
+
+.gc-grid-4,
+.gc-grid-3,
+.gc-grid-2{
+
+grid-template-columns:1fr;
+
+}
+
+}

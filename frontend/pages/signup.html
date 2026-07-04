@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | GenCampus Marketplace</title>
+
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+
+<body>
+
+    <div class="gc-auth-container">
+
+        <h1 class="gc-auth-title">Create Account</h1>
+
+        <p class="gc-auth-subtitle">
+            Join the GenCampus Marketplace
+        </p>
+
+        <!-- Feedback -->
+        <div id="auth-feedback" class="gc-feedback"></div>
+
+        <form id="signupForm">
+
+            <!-- Full Name -->
+            <div class="gc-form-group">
+                <label class="gc-label" for="fullName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    class="gc-input"
+                    placeholder="Enter your full name"
+                    required>
+            </div>
+
+            <!-- Email -->
+            <div class="gc-form-group">
+                <label class="gc-label" for="email">
+                    College Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="gc-input"
+                    placeholder="student@college.edu"
+                    required>
+            </div>
+
+            <!-- Phone -->
+            <div class="gc-form-group">
+                <label class="gc-label" for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="gc-input"
+                    placeholder="9876543210"
+                    maxlength="10"
+                    required>
+            </div>
+
+            <!-- Password -->
+            <div class="gc-form-group">
+                <label class="gc-label" for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="gc-input"
+                    placeholder="Create a strong password"
+                    required>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="gc-form-group">
+                <label class="gc-label" for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    class="gc-input"
+                    placeholder="Re-enter your password"
+                    required>
+            </div>
+
+            <!-- Button -->
+            <button
+                type="submit"
+                class="gc-btn-auth"
+                id="signupBtn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="gc-auth-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+
+</body>
+
+</html>

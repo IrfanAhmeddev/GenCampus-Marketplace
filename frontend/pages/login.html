@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | GenCampus Marketplace</title>
+
+    <link rel="stylesheet" href="../css/auth.css">
+
+</head>
+
+<body>
+
+<div class="gc-auth-container">
+
+    <h1 class="gc-auth-title">
+        Welcome Back
+    </h1>
+
+    <p class="gc-auth-subtitle">
+        Login to your GenCampus account
+    </p>
+
+    <div
+        id="auth-feedback"
+        class="gc-feedback">
+    </div>
+
+    <form id="loginForm">
+
+        <div class="gc-form-group">
+
+            <label class="gc-label">
+                College Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                class="gc-input"
+                placeholder="student@gmail.com
+                "
+                required>
+
+        </div>
+
+        <div class="gc-form-group">
+
+            <label class="gc-label">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                class="gc-input"
+                placeholder="Enter Password"
+                required>
+
+        </div>
+
+        <button
+            type="submit"
+            class="gc-btn-auth">
+
+            Login
+
+        </button>
+
+    </form>
+
+    <div class="gc-auth-link">
+
+        Don't have an account?
+
+        <a href="signup.html">
+
+            Register
+
+        </a>
+
+    </div>
+
+</div>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+
+</body>
+</html>

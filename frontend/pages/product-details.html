@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Product Details | GenCampus Marketplace</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/product-details.css">
+    <div id="navbar"></div>
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="gc-header">
+
+        <div class="gc-container">
+
+            <a href="products.html" class="gc-back-btn">
+                ← Back to Marketplace
+            </a>
+
+            <h1>Product Details</h1>
+
+        </div>
+
+    </header>
+
+    <!-- Main Content -->
+
+    <main class="gc-container">
+
+        <section class="gc-product-layout">
+
+            <!-- Product Image -->
+
+            <div class="gc-product-image">
+
+                <img
+                    id="productImage"
+                    src="https://via.placeholder.com/600x450"
+                    alt="Product">
+
+            </div>
+
+            <!-- Product Information -->
+
+            <div class="gc-product-info">
+
+                <span class="gc-badge gc-badge-success">
+
+                    Available
+
+                </span>
+
+                <h2 id="productTitle">
+
+                    Engineering Physics Book
+
+                </h2>
+
+                <h3
+                    id="productPrice"
+                    class="gc-price">
+
+                    ₹450
+
+                </h3>
+
+                <div class="gc-meta">
+
+                    <p>
+
+                        <strong>Category:</strong>
+
+                        <span id="productCategory">
+
+                            Books
+
+                        </span>
+
+                    </p>
+
+                    <p>
+
+                        <strong>Condition:</strong>
+
+                        <span id="productCondition">
+
+                            Good
+
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <hr>
+
+                <h3>
+
+                    Seller Information
+
+                </h3>
+
+                <p>
+
+                    <strong>Name:</strong>
+
+                    <span id="sellerName">
+
+                        John Doe
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>Department:</strong>
+
+                    <span id="sellerDepartment">
+
+                        Computer Science
+
+                    </span>
+
+                </p>
+
+                <hr>
+
+                <h3>
+
+                    Description
+
+                </h3>
+
+                <p id="productDescription">
+
+                    Engineering Physics textbook for second-year students.
+                    Good condition with minimal markings.
+
+                </p>
+
+                <button
+                    class="gc-btn gc-btn-primary gc-request-btn">
+
+                    Request Product
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/product-details.js"></script>
+
+</body>
+
+</html>

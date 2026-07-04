@@ -324,3 +324,165 @@ Modal
     max-width:500px;
 
 }
+
+
+/* ==========================================
+   Navbar
+========================================== */
+
+.gc-navbar{
+
+    background:#FFFFFF;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+.gc-navbar-content{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 0;
+
+}
+
+.gc-logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-decoration:none;
+
+    color:#1F2937;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.gc-logo-icon{
+
+    width:45px;
+
+    height:45px;
+
+    background:#4F46E5;
+
+    color:white;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.gc-nav-links{
+
+    display:flex;
+
+    gap:30px;
+
+    list-style:none;
+
+}
+
+.gc-nav-links a{
+
+    color:#374151;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.gc-nav-links a:hover{
+
+    color:#4F46E5;
+
+}
+
+.gc-user-menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.gc-user-name{
+
+    font-weight:600;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.gc-navbar-content{
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.gc-nav-links{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:15px;
+
+}
+
+.gc-user-menu{
+
+flex-direction:column;
+
+}
+
+}
+
+
+/* ==========================================
+Footer
+========================================== */
+
+.gc-footer{
+
+    margin-top:60px;
+
+    background:#1F2937;
+
+    color:white;
+
+    padding:25px;
+
+    text-align:center;
+
+}

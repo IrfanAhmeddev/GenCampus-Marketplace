@@ -1,0 +1,514 @@
+/* ==========================================
+   GenCampus Marketplace
+   Sell Product Page
+========================================== */
+
+:root {
+    --sell-danger: #EF4444;
+    --sell-danger-bg: #FEF2F2;
+    --sell-success: #10B981;
+    --sell-success-bg: #ECFDF5;
+}
+
+/* ==========================
+Header
+========================== */
+
+.gc-header {
+    background: var(--surface, #FFFFFF);
+    padding: 18px 32px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.gc-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.gc-brand-mark {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary, #4F46E5);
+    color: white;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.gc-brand h1 { font-size: 19px; }
+
+.gc-brand p {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+.gc-back-link {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-light);
+    white-space: nowrap;
+}
+
+.gc-back-link:hover { color: var(--primary); }
+
+/* ==========================
+Two-column layout
+========================== */
+
+.gc-sell-layout {
+    max-width: 1160px;
+    margin: 32px auto 64px;
+    padding: 0 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.gc-sell-form-panel {
+    flex: 1 1 60%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gc-sell-preview-panel {
+    flex: 1 1 36%;
+    position: sticky;
+    top: 24px;
+}
+
+/* ==========================
+Form sections
+========================== */
+
+.gc-form-section { padding: 26px; }
+
+.gc-section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.gc-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 7px;
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    font-family: monospace;
+}
+
+.gc-section-head h2 { font-size: 17px; font-weight: 700; }
+
+.gc-section-hint {
+    color: var(--text-light);
+    font-size: 13.5px;
+    margin: 6px 0 18px;
+}
+
+.gc-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.gc-form-group:last-child { margin-bottom: 0; }
+
+.gc-form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.gc-optional { font-weight: 400; color: var(--text-light); }
+
+.gc-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.gc-textarea { resize: vertical; min-height: 120px; }
+
+.gc-field-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.gc-char-count {
+    font-size: 12px;
+    color: var(--text-light);
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+.gc-field-error {
+    font-size: 12.5px;
+    color: var(--sell-danger);
+    min-height: 16px;
+}
+
+.gc-field-hint {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 6px;
+}
+
+/* Invalid state on inputs */
+.gc-input.is-invalid,
+.gc-select.is-invalid,
+.gc-textarea.is-invalid {
+    border-color: var(--sell-danger);
+}
+
+.gc-input.is-invalid:focus,
+.gc-select.is-invalid:focus,
+.gc-textarea.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+/* Price input with ₹ prefix */
+
+.gc-input-wrap { position: relative; }
+
+.gc-input-wrap--prefix .gc-input { padding-left: 30px; }
+
+.gc-input-prefix {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-size: 15px;
+    pointer-events: none;
+}
+
+/* ==========================
+Dropzone + image grid
+========================== */
+
+.gc-dropzone {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 32px 20px;
+    text-align: center;
+    background: #FAFAFA;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.gc-dropzone:hover,
+.gc-dropzone:focus-visible {
+    border-color: var(--primary);
+    background: rgba(79, 70, 229, 0.03);
+    outline: none;
+}
+
+.gc-dropzone.is-dragover {
+    border-color: var(--primary);
+    background: rgba(79, 70, 229, 0.06);
+}
+
+.gc-dropzone-icon { font-size: 26px; margin-bottom: 8px; }
+
+.gc-dropzone p { font-size: 14px; color: var(--text-main); }
+
+.gc-dropzone-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 12.5px;
+    color: var(--text-light);
+}
+
+.gc-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.gc-image-thumb {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.gc-image-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gc-image-thumb .gc-cover-tag {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    background: rgba(17, 24, 39, 0.75);
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.gc-image-thumb .gc-remove-thumb {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(17, 24, 39, 0.75);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gc-image-thumb .gc-remove-thumb:hover { background: var(--sell-danger); }
+
+/* ==========================
+Condition chips
+========================== */
+
+.gc-chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gc-chip {
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-main);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.gc-chip:hover { border-color: var(--border-hover, #D1D5DB); }
+
+.gc-chip:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.gc-chip[aria-checked="true"] {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* ==========================
+Form-level feedback banner
+========================== */
+
+.gc-form-feedback {
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.gc-form-feedback.is-error   { background: var(--sell-danger-bg); color: var(--sell-danger); }
+.gc-form-feedback.is-success { background: var(--sell-success-bg); color: #0F7A54; }
+
+/* ==========================
+Submit button
+========================== */
+
+.gc-btn-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 4px;
+    padding: 14px;
+    font-size: 15px;
+}
+
+.gc-spinner-sm {
+    display: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+}
+
+.gc-btn-submit.is-loading .gc-btn-text { opacity: 0.7; }
+.gc-btn-submit.is-loading .gc-spinner-sm {
+    display: inline-block;
+    animation: gc-sell-spin 0.7s linear infinite;
+}
+
+@keyframes gc-sell-spin { to { transform: rotate(360deg); } }
+
+/* ==========================
+Live preview card
+========================== */
+
+.gc-preview-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.gc-preview-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.gc-preview-image-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 80%;
+    background: #F3F4F6;
+}
+
+.gc-preview-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+.gc-preview-placeholder span { font-size: 28px; }
+
+.gc-preview-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gc-preview-category {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.gc-preview-body { padding: 14px 16px 18px; }
+
+.gc-preview-condition {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: var(--sell-success-bg);
+    color: #0F7A54;
+    margin-bottom: 8px;
+}
+
+.gc-preview-title {
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.gc-preview-location {
+    font-size: 12.5px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.gc-preview-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.gc-preview-price {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.gc-preview-original-price {
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: line-through;
+}
+
+.gc-preview-discount {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--sell-success);
+}
+
+.gc-preview-hint {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ==========================
+Responsive
+========================== */
+
+@media (max-width: 900px) {
+    .gc-sell-layout { flex-direction: column; }
+    .gc-sell-preview-panel { position: static; width: 100%; }
+}
+
+@media (max-width: 640px) {
+    .gc-form-row { grid-template-columns: 1fr; }
+    .gc-sell-layout { padding: 0 16px; margin: 20px auto 48px; }
+    .gc-form-section { padding: 20px; }
+    .gc-header { padding: 16px 20px; }
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Product | GenCampus Marketplace</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sell.css">
+</head>
+<body>
+
+  <header class="gc-header">
+    <div id="navbar"></div>
+    <div class="gc-brand">
+      <span class="gc-brand-mark">GC</span>
+      <div>
+        <h1>Sell your product</h1>
+        <p>List your item for other students in a couple of minutes.</p>
+      </div>
+    </div>
+    <a href="products.html" class="gc-back-link">&larr; Back to marketplace</a>
+  </header>
+
+  <main class="gc-sell-layout">
+
+    <form id="sellForm" class="gc-sell-form-panel" novalidate>
+
+      <div id="formFeedback" class="gc-form-feedback" role="alert" aria-live="polite" hidden></div>
+
+      <!-- Step 1: Photos -->
+      <section class="gc-card gc-form-section">
+        <div class="gc-section-head">
+          <span class="gc-step-num">01</span>
+          <h2>Photos</h2>
+        </div>
+        <p class="gc-section-hint">Add up to 5 photos. The first one becomes your cover image.</p>
+
+        <div class="gc-dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload product photos">
+          <input type="file" id="productImage" accept="image/*" multiple hidden>
+          <div class="gc-dropzone-icon">📷</div>
+          <p><strong>Click to upload</strong> or drag and drop</p>
+          <span class="gc-dropzone-sub">PNG or JPG · up to 5 photos</span>
+        </div>
+
+        <div class="gc-image-grid" id="imageGrid"></div>
+        <span class="gc-field-error" id="err-images"></span>
+      </section>
+
+      <!-- Step 2: Details -->
+      <section class="gc-card gc-form-section">
+        <div class="gc-section-head">
+          <span class="gc-step-num">02</span>
+          <h2>Product details</h2>
+        </div>
+
+        <div class="gc-form-group">
+          <label for="title">Product title</label>
+          <input type="text" id="title" class="gc-input" placeholder="Engineering Physics Book" maxlength="80">
+          <div class="gc-field-meta">
+            <span class="gc-field-error" id="err-title"></span>
+            <span class="gc-char-count" id="count-title">0/80</span>
+          </div>
+        </div>
+
+        <div class="gc-form-group">
+          <label for="description">Description</label>
+          <textarea id="description" class="gc-textarea" rows="5" maxlength="500" placeholder="Describe the condition, why you're selling, and anything a buyer should know."></textarea>
+          <div class="gc-field-meta">
+            <span class="gc-field-error" id="err-description"></span>
+            <span class="gc-char-count" id="count-description">0/500</span>
+          </div>
+        </div>
+
+        <div class="gc-form-row">
+          <div class="gc-form-group">
+            <label for="category">Category</label>
+            <select id="category" class="gc-select">
+              <option value="">Select category</option>
+              <option>Books</option>
+              <option>Electronics</option>
+              <option>Furniture</option>
+              <option>Accessories</option>
+            </select>
+            <span class="gc-field-error" id="err-category"></span>
+          </div>
+
+          <div class="gc-form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" class="gc-input" placeholder="Hostel / Department">
+            <span class="gc-field-error" id="err-location"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 3: Price & condition -->
+      <section class="gc-card gc-form-section">
+        <div class="gc-section-head">
+          <span class="gc-step-num">03</span>
+          <h2>Price &amp; condition</h2>
+        </div>
+
+        <div class="gc-form-row">
+          <div class="gc-form-group">
+            <label for="price">Price</label>
+            <div class="gc-input-wrap gc-input-wrap--prefix">
+              <span class="gc-input-prefix">₹</span>
+              <input type="number" id="price" class="gc-input" placeholder="500" min="1">
+            </div>
+            <span class="gc-field-error" id="err-price"></span>
+          </div>
+
+          <div class="gc-form-group">
+            <label for="originalPrice">Original price <span class="gc-optional">(optional)</span></label>
+            <div class="gc-input-wrap gc-input-wrap--prefix">
+              <span class="gc-input-prefix">₹</span>
+              <input type="number" id="originalPrice" class="gc-input" placeholder="700" min="1">
+            </div>
+            <span class="gc-field-hint">Shown crossed out to highlight the discount.</span>
+          </div>
+        </div>
+
+        <div class="gc-form-group">
+          <label id="conditionLabel">Condition</label>
+          <div class="gc-chip-group" role="radiogroup" aria-labelledby="conditionLabel" id="conditionChips">
+            <button type="button" class="gc-chip" data-value="New" role="radio" aria-checked="false">New</button>
+            <button type="button" class="gc-chip" data-value="Like New" role="radio" aria-checked="false">Like New</button>
+            <button type="button" class="gc-chip" data-value="Good" role="radio" aria-checked="false">Good</button>
+            <button type="button" class="gc-chip" data-value="Fair" role="radio" aria-checked="false">Fair</button>
+          </div>
+          <!-- kept for compatibility with anything reading #condition's value -->
+          <select id="condition" hidden>
+            <option>New</option>
+            <option>Like New</option>
+            <option>Good</option>
+            <option>Fair</option>
+          </select>
+        </div>
+      </section>
+
+      <button type="submit" class="gc-btn gc-btn-primary w-100 gc-btn-submit" id="publishBtn">
+        <span class="gc-btn-text">Publish listing</span>
+        <span class="gc-spinner-sm" aria-hidden="true"></span>
+      </button>
+
+    </form>
+
+    <aside class="gc-sell-preview-panel">
+      <p class="gc-preview-label">Live preview</p>
+
+      <div class="gc-preview-card" id="previewCard">
+        <div class="gc-preview-image-wrap">
+          <div class="gc-preview-placeholder" id="previewPlaceholder">
+            <span>🖼️</span>
+            <p>Your photo will appear here</p>
+          </div>
+          <img class="gc-preview-image" id="previewImage" alt="" hidden>
+          <span class="gc-preview-category" id="previewCategory" hidden></span>
+        </div>
+
+        <div class="gc-preview-body">
+          <span class="gc-preview-condition" id="previewCondition" hidden></span>
+          <h3 class="gc-preview-title" id="previewTitle">Your product title</h3>
+          <p class="gc-preview-location" id="previewLocation" hidden></p>
+
+          <div class="gc-preview-price-row">
+            <span class="gc-preview-price" id="previewPrice">₹0</span>
+            <span class="gc-preview-original-price" id="previewOriginalPrice" hidden></span>
+            <span class="gc-preview-discount" id="previewDiscount" hidden></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="gc-preview-hint">This is roughly how your listing will look in the marketplace grid.</p>
+    </aside>
+<div id="footer"></div>
+  </main>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="../js/sell.js"></script>
+</body>
+</html>

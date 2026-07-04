@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | GenCampus Marketplace</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/profile.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="gc-header">
+
+        <div class="gc-container gc-flex-between">
+
+            <div>
+
+                <h1>My Profile</h1>
+
+                <p>Manage your GenCampus Marketplace account</p>
+
+            </div>
+
+            <a href="dashboard.html" class="gc-btn gc-btn-secondary">
+
+                ← Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- Main Content -->
+
+    <main class="gc-container">
+
+        <section class="gc-profile-layout">
+
+            <!-- Left Card -->
+
+            <aside class="gc-profile-card">
+
+                <img
+                    id="profileAvatar"
+                    src="https://via.placeholder.com/180"
+                    alt="Profile Picture"
+                    class="gc-profile-avatar">
+
+                <h2 id="profileName">
+
+                    Santhosh
+
+                </h2>
+
+                <p id="profileDepartment">
+
+                    Computer Science Engineering
+
+                </p>
+
+                <span class="gc-profile-badge">
+
+                    Verified Student
+
+                </span>
+
+            </aside>
+
+            <!-- Right Section -->
+
+            <section class="gc-profile-content">
+
+                <!-- Personal Information -->
+
+                <div class="gc-card">
+
+                    <h2>Personal Information</h2>
+
+                    <div class="gc-profile-info">
+
+                        <div>
+
+                            <label>Full Name</label>
+
+                            <p id="fullName">
+
+                                Santhosh
+
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Email</label>
+
+                            <p id="email">
+
+                                santhosh@college.edu
+
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Phone</label>
+
+                            <p id="phone">
+
+                                9876543210
+
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Department</label>
+
+                            <p id="department">
+
+                                Computer Science
+
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <label>College</label>
+
+                            <p id="college">
+
+                                ABC Engineering College
+
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <label>Member Since</label>
+
+                            <p id="memberSince">
+
+                                January 2026
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Statistics -->
+
+                <div class="gc-card">
+
+                    <h2>Marketplace Statistics</h2>
+
+                    <div class="gc-profile-stats">
+
+                        <div class="gc-stat-box">
+
+                            <h3 id="productsListed">
+
+                                12
+
+                            </h3>
+
+                            <p>Products Listed</p>
+
+                        </div>
+
+                        <div class="gc-stat-box">
+
+                            <h3 id="productsSold">
+
+                                8
+
+                            </h3>
+
+                            <p>Products Sold</p>
+
+                        </div>
+
+                        <div class="gc-stat-box">
+
+                            <h3 id="requestsReceived">
+
+                                21
+
+                            </h3>
+
+                            <p>Requests Received</p>
+
+                        </div>
+
+                        <div class="gc-stat-box">
+
+                            <h3 id="activeListings">
+
+                                4
+
+                            </h3>
+
+                            <p>Active Listings</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Actions -->
+
+                <div class="gc-card">
+
+                    <h2>Account Actions</h2>
+
+                    <div class="gc-action-buttons">
+
+                        <button
+                            id="editProfileBtn"
+                            class="gc-btn gc-btn-primary">
+
+                            Edit Profile
+
+                        </button>
+
+                        <button
+                            id="changePasswordBtn"
+                            class="gc-btn gc-btn-secondary">
+
+                            Change Password
+
+                        </button>
+
+                        <button
+                            id="logoutBtn"
+                            class="gc-btn gc-btn-danger">
+
+                            Logout
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/profile.js"></script>
+
+</body>
+
+</html>

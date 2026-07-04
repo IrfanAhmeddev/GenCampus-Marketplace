@@ -1,134 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account | GenCampus Marketplace</title>
-<link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet" href="../css/layout.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/auth.css">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | GenCampus Marketplace</title>
 
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
 <body>
 
-    <div class="gc-auth-container">
+  <div class="gc-page">
 
-        <h1 class="gc-auth-title">Create Account</h1>
+    <!-- Showcase / brand side: onboarding steps on the corkboard -->
+    <aside class="gc-showcase" aria-hidden="true">
+      <div class="gc-showcase-inner">
 
-        <p class="gc-auth-subtitle">
-            Join the GenCampus Marketplace
+        <div class="gc-brand">
+          <span class="gc-brand-mark">GC</span>
+          <span class="gc-brand-name">GenCampus</span>
+        </div>
+
+        <h2 class="gc-showcase-heading">List your first<br>item in under<br>2 minutes.</h2>
+        <p class="gc-showcase-sub">
+          Sign up with your campus email — students near you are already browsing.
         </p>
 
-        <!-- Feedback -->
-        <div id="auth-feedback" class="gc-feedback"></div>
+        <div class="gc-board gc-board--steps">
+          <div class="gc-card gc-card--step gc-card--1">
+            <span class="gc-pin"></span>
+            <span class="gc-step-num">01</span>
+            <p class="gc-card-title">Verify your .edu email</p>
+          </div>
 
-        <form id="signupForm">
+          <div class="gc-card gc-card--step gc-card--2">
+            <span class="gc-pin"></span>
+            <span class="gc-step-num">02</span>
+            <p class="gc-card-title">Snap a photo, set a price</p>
+          </div>
 
-            <!-- Full Name -->
-            <div class="gc-form-group">
-                <label class="gc-label" for="fullName">
-                    Full Name
-                </label>
+          <div class="gc-card gc-card--step gc-card--3">
+            <span class="gc-pin"></span>
+            <span class="gc-step-num">03</span>
+            <p class="gc-card-title">Meet on campus, get paid</p>
+          </div>
+        </div>
 
-                <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    class="gc-input"
-                    placeholder="Enter your full name"
-                    required>
+        <div class="gc-trust-row">
+          <span class="gc-trust-item">🎓 .edu verified</span>
+          <span class="gc-trust-item">Free to join</span>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Signup form -->
+    <main class="gc-auth-container">
+      <div class="gc-auth-container-inner">
+
+        <div class="gc-brand gc-brand--mobile">
+          <span class="gc-brand-mark">GC</span>
+          <span class="gc-brand-name">GenCampus</span>
+        </div>
+
+        <h1 class="gc-auth-title">Create your account</h1>
+        <p class="gc-auth-subtitle">Join the GenCampus Marketplace</p>
+
+        <div id="auth-feedback" class="gc-feedback" role="alert" aria-live="polite"></div>
+
+        <form id="signupForm" novalidate>
+
+          <div class="gc-form-group">
+            <label class="gc-label" for="fullName">Full name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="gc-input"
+              placeholder="Enter your full name"
+              autocomplete="name"
+              required>
+          </div>
+
+          <div class="gc-form-group">
+            <label class="gc-label" for="email">College email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="gc-input"
+              placeholder="student@college.edu"
+              autocomplete="email"
+              required>
+          </div>
+
+          <div class="gc-form-group">
+            <label class="gc-label" for="phone">Phone number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="gc-input"
+              placeholder="9876543210"
+              maxlength="10"
+              inputmode="numeric"
+              pattern="[0-9]{10}"
+              autocomplete="tel"
+              required>
+          </div>
+
+          <div class="gc-form-group">
+            <label class="gc-label" for="password">Password</label>
+            <div class="gc-input-wrap">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="gc-input"
+                placeholder="Create a strong password"
+                autocomplete="new-password"
+                minlength="8"
+                required>
+              <button type="button" class="gc-toggle-pass" data-target="password" aria-label="Show password" aria-pressed="false">
+                <svg class="gc-icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="gc-icon-eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" hidden>
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.86 21.86 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a21.86 21.86 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
             </div>
-
-            <!-- Email -->
-            <div class="gc-form-group">
-                <label class="gc-label" for="email">
-                    College Email
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="gc-input"
-                    placeholder="student@college.edu"
-                    required>
+            <div class="gc-strength" id="strengthMeter" hidden>
+              <div class="gc-strength-track"><div class="gc-strength-bar" id="strengthBar"></div></div>
+              <span class="gc-strength-label" id="strengthLabel"></span>
             </div>
+          </div>
 
-            <!-- Phone -->
-            <div class="gc-form-group">
-                <label class="gc-label" for="phone">
-                    Phone Number
-                </label>
-
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    class="gc-input"
-                    placeholder="9876543210"
-                    maxlength="10"
-                    required>
+          <div class="gc-form-group">
+            <label class="gc-label" for="confirmPassword">Confirm password</label>
+            <div class="gc-input-wrap">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                class="gc-input"
+                placeholder="Re-enter your password"
+                autocomplete="new-password"
+                required>
+              <button type="button" class="gc-toggle-pass" data-target="confirmPassword" aria-label="Show password" aria-pressed="false">
+                <svg class="gc-icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="gc-icon-eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" hidden>
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.86 21.86 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a21.86 21.86 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
             </div>
+            <span class="gc-match-hint" id="matchHint"></span>
+          </div>
 
-            <!-- Password -->
-            <div class="gc-form-group">
-                <label class="gc-label" for="password">
-                    Password
-                </label>
+          <label class="gc-checkbox gc-checkbox--terms">
+            <input type="checkbox" id="agreeTerms" required>
+            <span>I agree to the Terms of Service and Campus Honor Code</span>
+          </label>
 
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="gc-input"
-                    placeholder="Create a strong password"
-                    required>
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="gc-form-group">
-                <label class="gc-label" for="confirmPassword">
-                    Confirm Password
-                </label>
-
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    class="gc-input"
-                    placeholder="Re-enter your password"
-                    required>
-            </div>
-
-            <!-- Button -->
-            <button
-                type="submit"
-                class="gc-btn-auth"
-                id="signupBtn">
-
-                Create Account
-
-            </button>
+          <button type="submit" class="gc-btn-auth" id="signupBtn">
+            <span class="gc-btn-text">Create account</span>
+            <span class="gc-spinner" aria-hidden="true"></span>
+          </button>
 
         </form>
 
-        <div class="gc-auth-link">
+        <div class="gc-divider"><span>Already a member?</span></div>
 
-            Already have an account?
+        <a href="login.html" class="gc-btn-secondary">Log in instead</a>
 
-            <a href="login.html">
-                Login
-            </a>
+      </div>
+    </main>
 
-        </div>
+  </div>
 
-    </div>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  // Lightweight UI-only enhancements. Does not touch auth logic in auth.js.
+  (function () {
+    // Password show/hide, works for both password fields
+    document.querySelectorAll('.gc-toggle-pass').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-target'));
+        if (!target) return;
+        var isPassword = target.type === 'password';
+        target.type = isPassword ? 'text' : 'password';
+        btn.setAttribute('aria-pressed', String(isPassword));
+        btn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+        btn.querySelector('.gc-icon-eye').hidden = isPassword;
+        btn.querySelector('.gc-icon-eye-off').hidden = !isPassword;
+      });
+    });
 
-    <script src="../js/api.js"></script>
-    <script src="../js/auth.js"></script>
+    // Digits-only phone input
+    var phone = document.getElementById('phone');
+    if (phone) {
+      phone.addEventListener('input', function () {
+        phone.value = phone.value.replace(/\D/g, '').slice(0, 10);
+      });
+    }
 
+    // Password strength meter (cosmetic guidance only; server/auth.js still owns real validation)
+    var password = document.getElementById('password');
+    var meter = document.getElementById('strengthMeter');
+    var bar = document.getElementById('strengthBar');
+    var label = document.getElementById('strengthLabel');
+
+    function scorePassword(value) {
+      var score = 0;
+      if (value.length >= 8) score++;
+      if (value.length >= 12) score++;
+      if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score++;
+      if (/[0-9]/.test(value)) score++;
+      if (/[^A-Za-z0-9]/.test(value)) score++;
+      return score;
+    }
+
+    if (password && meter && bar && label) {
+      password.addEventListener('input', function () {
+        var value = password.value;
+        if (!value) { meter.hidden = true; return; }
+        meter.hidden = false;
+        var score = scorePassword(value);
+        var levels = [
+          { max: 1, width: '25%',  cls: 'is-weak',   text: 'Weak' },
+          { max: 3, width: '60%',  cls: 'is-medium', text: 'Okay' },
+          { max: 5, width: '100%', cls: 'is-strong', text: 'Strong' }
+        ];
+        var level = levels.find(function (l) { return score <= l.max; }) || levels[levels.length - 1];
+        bar.style.width = level.width;
+        bar.className = 'gc-strength-bar ' + level.cls;
+        label.textContent = level.text;
+      });
+    }
+
+    // Confirm-password live match hint
+    var confirmPassword = document.getElementById('confirmPassword');
+    var matchHint = document.getElementById('matchHint');
+
+    function checkMatch() {
+      if (!confirmPassword.value) { matchHint.textContent = ''; matchHint.className = 'gc-match-hint'; return; }
+      var matches = password.value === confirmPassword.value;
+      matchHint.textContent = matches ? 'Passwords match' : "Passwords don't match yet";
+      matchHint.className = 'gc-match-hint ' + (matches ? 'is-match' : 'is-mismatch');
+    }
+
+    if (password && confirmPassword && matchHint) {
+      password.addEventListener('input', checkMatch);
+      confirmPassword.addEventListener('input', checkMatch);
+    }
+
+    // Visual loading state on submit
+    var form = document.getElementById('signupForm');
+    var signupBtn = document.getElementById('signupBtn');
+    if (form && signupBtn) {
+      form.addEventListener('submit', function () {
+        signupBtn.classList.add('is-loading');
+        signupBtn.disabled = true;
+        window.setTimeout(function () {
+          signupBtn.classList.remove('is-loading');
+          signupBtn.disabled = false;
+        }, 4000);
+      });
+    }
+  })();
+</script>
 </body>
-
 </html>

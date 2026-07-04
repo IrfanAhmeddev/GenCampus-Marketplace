@@ -1,0 +1,329 @@
+/* ==========================================
+   GenCampus Marketplace
+   Profile Page
+========================================== */
+
+/* ==========================
+Header
+========================== */
+
+.gc-header{
+    background:var(--color-surface,#FFFFFF);
+    padding:25px 0;
+    box-shadow:var(--shadow,0 2px 10px rgba(0,0,0,.08));
+}
+
+.gc-header h1{
+    color:var(--color-brand,#4F46E5);
+    margin-bottom:5px;
+}
+
+.gc-header p{
+    color:var(--color-text-muted,#6B7280);
+}
+
+/* ==========================
+Layout
+========================== */
+
+.gc-profile-layout{
+
+    display:grid;
+
+    grid-template-columns:320px 1fr;
+
+    gap:30px;
+
+    margin:40px 0;
+
+    align-items:start;
+
+}
+
+/* ==========================
+Profile Card
+========================== */
+
+.gc-profile-card{
+
+    background:var(--color-surface,#FFFFFF);
+
+    border-radius:16px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow,0 4px 12px rgba(0,0,0,.08));
+
+}
+
+.gc-profile-avatar{
+
+    width:180px;
+
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:6px solid var(--color-brand,#4F46E5);
+
+    margin-bottom:20px;
+
+}
+
+.gc-profile-card h2{
+
+    margin-bottom:10px;
+
+    color:#111827;
+
+}
+
+.gc-profile-card p{
+
+    color:#6B7280;
+
+    margin-bottom:15px;
+
+}
+
+.gc-profile-badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+    border-radius:25px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+/* ==========================
+Right Side
+========================== */
+
+.gc-profile-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+/* ==========================
+Cards
+========================== */
+
+.gc-card{
+
+    background:var(--color-surface,#FFFFFF);
+
+    padding:30px;
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow,0 4px 12px rgba(0,0,0,.08));
+
+}
+
+.gc-card h2{
+
+    margin-bottom:25px;
+
+    color:#111827;
+
+}
+
+/* ==========================
+Information Grid
+========================== */
+
+.gc-profile-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+.gc-profile-info label{
+
+    display:block;
+
+    font-size:14px;
+
+    color:#6B7280;
+
+    margin-bottom:6px;
+
+}
+
+.gc-profile-info p{
+
+    font-size:17px;
+
+    font-weight:600;
+
+    color:#111827;
+
+}
+
+/* ==========================
+Statistics
+========================== */
+
+.gc-profile-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+}
+
+.gc-stat-box{
+
+    background:#F9FAFB;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+.gc-stat-box h3{
+
+    color:var(--color-brand,#4F46E5);
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.gc-stat-box p{
+
+    color:#6B7280;
+
+    font-size:15px;
+
+}
+
+/* ==========================
+Buttons
+========================== */
+
+.gc-action-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.gc-action-buttons .gc-btn{
+
+    flex:1;
+
+    min-width:180px;
+
+}
+
+/* Danger Button */
+
+.gc-btn-danger{
+
+    background:#EF4444;
+
+    color:white;
+
+    border:none;
+
+}
+
+.gc-btn-danger:hover{
+
+    background:#DC2626;
+
+}
+
+/* ==========================
+Responsive
+========================== */
+
+@media(max-width:992px){
+
+.gc-profile-layout{
+
+grid-template-columns:1fr;
+
+}
+
+.gc-profile-info{
+
+grid-template-columns:1fr;
+
+}
+
+.gc-profile-stats{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.gc-card{
+
+padding:20px;
+
+}
+
+.gc-profile-avatar{
+
+width:140px;
+
+height:140px;
+
+}
+
+.gc-profile-stats{
+
+grid-template-columns:1fr;
+
+}
+
+.gc-action-buttons{
+
+flex-direction:column;
+
+}
+
+.gc-action-buttons .gc-btn{
+
+width:100%;
+
+}
+
+}

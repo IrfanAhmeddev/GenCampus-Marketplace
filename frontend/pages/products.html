@@ -1,100 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketplace | GenCampus</title>
-<link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet" href="../css/layout.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/products.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace | GenCampus</title>
+
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/products.css">
 </head>
 <body>
 
-    <header class="gc-header">
-        <div class="gc-brand">
-            <h1>GenCampus Marketplace</h1>
-            <p>Buy and Sell within your Campus Community</p>
-        </div>
-    </header>
+  <header class="gc-header">
+    <div class="gc-brand">
+      <span class="gc-brand-mark">GC</span>
+      <div>
+        <h1>GenCampus Marketplace</h1>
+        <p>Buy and sell within your campus community</p>
+      </div>
+    </div>
 
-    <section class="gc-filters">
-        <div class="search-wrapper">
-            <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="Search products, brands, and categories...">
-        </div>
+    <a href="sell.html" class="gc-btn-sell">
+      <span>+</span> List an item
+    </a>
+  </header>
 
-        <select id="categoryFilter">
-            <option value="">All Categories</option>
-            <option value="Books">Books</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Accessories">Accessories</option>
-        </select>
+  <section class="gc-filters">
+    <div class="search-wrapper">
+      <span aria-hidden="true">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search products, brands, and categories..." aria-label="Search products">
+    </div>
 
-        <div class="price-filter">
-            <input type="number" id="minPrice" placeholder="Min ₹">
-            <span class="price-separator">to</span>
-            <input type="number" id="maxPrice" placeholder="Max ₹">
-        </div>
-    </section>
+    <select id="categoryFilter" aria-label="Filter by category">
+      <option value="">All categories</option>
+      <option value="Books">Books</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Furniture">Furniture</option>
+      <option value="Accessories">Accessories</option>
+    </select>
 
-    <main class="container">
-        <div class="products-grid" id="productsGrid">
+    <div class="price-filter">
+      <input type="number" id="minPrice" placeholder="Min ₹" aria-label="Minimum price" min="0">
+      <span class="price-separator">to</span>
+      <input type="number" id="maxPrice" placeholder="Max ₹" aria-label="Maximum price" min="0">
+    </div>
 
-            <div class="product-card">
-                <div class="image-container">
-                    <div class="badge-container">
-                        <span class="category">Books</span>
-                        <span class="status available">Available</span>
-                    </div>
-                    <img src="../assets/laptop.jpg" alt="Engineering Physics Book">
-                </div>
-                <div class="product-info">
-                    <h3>Engineering Physics Volume I (Latest Edition)</h3>
-                    
-                    <div class="rating-row">
-                        <span class="stars">★★★★☆</span>
-                        <span class="rating-count">(12)</span>
-                    </div>
+    <select id="sortFilter" aria-label="Sort products">
+      <option value="newest">Newest first</option>
+      <option value="price-low">Price: low to high</option>
+      <option value="price-high">Price: high to low</option>
+      <option value="rating">Highest rated</option>
+    </select>
+  </section>
 
-                    <div class="price-row">
-                        <span class="price">₹450</span>
-                        <span class="original-price">₹700</span>
-                    </div>
+  <div class="gc-filter-meta">
+    <span id="resultsCount" aria-live="polite"></span>
+    <button id="clearFilters" class="gc-clear-btn" hidden>Clear all filters</button>
+  </div>
 
-                    <button class="btn-action">View Details</button>
-                </div>
-            </div>
+  <main class="container">
+    <div class="products-grid" id="productsGrid"></div>
 
-            <div class="product-card is-sold">
-                <div class="image-container">
-                    <div class="badge-container">
-                        <span class="category">Electronics</span>
-                        <span class="status sold">Sold Out</span>
-                    </div>
-                    <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&auto=format&fit=crop" alt="Dell Laptop">
-                </div>
-                <div class="product-info">
-                    <h3>Dell Inspiron 15 Core i5 - 8GB RAM</h3>
-                    
-                    <div class="rating-row">
-                        <span class="stars">★★★★★</span>
-                        <span class="rating-count">(4)</span>
-                    </div>
+    <div class="gc-empty-state" id="emptyState" hidden>
+      <div class="gc-empty-icon">🔎</div>
+      <h3>No items match your filters</h3>
+      <p>Try a different keyword, category, or price range.</p>
+      <button class="gc-btn gc-btn-primary" id="emptyStateClear">Clear all filters</button>
+    </div>
+  </main>
 
-                    <div class="price-row">
-                        <span class="price">₹25,000</span>
-                    </div>
-
-                    <button class="btn-action" disabled>Out of Stock</button>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <script src="../js/api.js"></script>
-    <script src="../js/products.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/products.js"></script>
 </body>
 </html>

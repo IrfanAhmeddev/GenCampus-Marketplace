@@ -1,98 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | GenCampus Marketplace</title>
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Login | GenCampus Marketplace</title>
-
-<link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet" href="../css/layout.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/auth.css">
-
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/auth.css">
 </head>
-
 <body>
 
-<div class="gc-auth-container">
+  <div class="gc-page">
 
-    <h1 class="gc-auth-title">
-        Welcome Back
-    </h1>
+    <!-- Showcase / brand side: the "corkboard" -->
+    <aside class="gc-showcase" aria-hidden="true">
+      <div class="gc-showcase-inner">
 
-    <p class="gc-auth-subtitle">
-        Login to your GenCampus account
-    </p>
-
-    <div
-        id="auth-feedback"
-        class="gc-feedback">
-    </div>
-
-    <form id="loginForm">
-
-        <div class="gc-form-group">
-
-            <label class="gc-label">
-                College Email
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                class="gc-input"
-                placeholder="student@gmail.com
-                "
-                required>
-
+        <div class="gc-brand">
+          <span class="gc-brand-mark">GC</span>
+          <span class="gc-brand-name">GenCampus</span>
         </div>
 
-        <div class="gc-form-group">
+        <h2 class="gc-showcase-heading">Your dorm's<br>flea market,<br>online.</h2>
+        <p class="gc-showcase-sub">
+          Buy, sell, and swap with students on your own campus. No shipping, no strangers, no fuss.
+        </p>
 
-            <label class="gc-label">
-                Password
-            </label>
+        <div class="gc-board">
+          <div class="gc-card gc-card--1">
+            <span class="gc-pin"></span>
+            <span class="gc-card-tag">Textbooks</span>
+            <p class="gc-card-title">Theory of computation</p>
+            <span class="gc-card-price">rs.100</span>
+          </div>
 
+          <div class="gc-card gc-card--2 gc-card--sold">
+            <span class="gc-pin"></span>
+            <span class="gc-card-tag">Calculator</span>
+            <p class="gc-card-title">fx 991ES Plus
+            </p>
+            <span class="gc-card-price">rs.300</span>
+            <span class="gc-stamp">SOLD</span>
+          </div>
+
+          <div class="gc-card gc-card--3">
+            <span class="gc-pin"></span>
+            <span class="gc-card-tag">Laptop</span>
+            <p class="gc-card-title">Dell Inspiron 15</p>
+            <span class="gc-card-price">rs.25000</span>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Auth form -->
+    <main class="gc-auth-container">
+      <div class="gc-auth-container-inner">
+
+        <div class="gc-brand gc-brand--mobile">
+          <span class="gc-brand-mark">GC</span>
+          <span class="gc-brand-name">GenCampus</span>
+        </div>
+
+        <h1 class="gc-auth-title">Welcome back</h1>
+        <p class="gc-auth-subtitle">Log in to buy and sell on campus</p>
+
+        <div id="auth-feedback" class="gc-feedback" role="alert" aria-live="polite"></div>
+
+        <form id="loginForm" novalidate>
+
+          <div class="gc-form-group">
+            <label class="gc-label" for="email">College email</label>
             <input
+              type="email"
+              id="email"
+              class="gc-input"
+              placeholder="you@college.edu"
+              autocomplete="email"
+              required>
+          </div>
+
+          <div class="gc-form-group">
+            <label class="gc-label" for="password">Password</label>
+            <div class="gc-input-wrap">
+              <input
                 type="password"
                 id="password"
                 class="gc-input"
-                placeholder="Enter Password"
+                placeholder="Enter password"
+                autocomplete="current-password"
                 required>
+              <button type="button" class="gc-toggle-pass" id="togglePassword" aria-label="Show password" aria-pressed="false">
+                <svg class="gc-icon-eye" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="gc-icon-eye-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" hidden>
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.86 21.86 0 0 1 5.06-6.06M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a21.86 21.86 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
 
-        </div>
+          <div class="gc-form-row">
+            <label class="gc-checkbox">
+              <input type="checkbox" id="remember">
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="gc-forgot-link">Forgot password?</a>
+          </div>
 
-        <button
-            type="submit"
-            class="gc-btn-auth">
+          <button type="submit" class="gc-btn-auth" id="loginBtn">
+            <span class="gc-btn-text">Log in</span>
+            <span class="gc-spinner" aria-hidden="true"></span>
+          </button>
 
-            Login
+        </form>
 
-        </button>
+        <div class="gc-divider"><span>New here?</span></div>
 
-    </form>
+        <a href="signup.html" class="gc-btn-secondary">Create a free account</a>
 
-    <div class="gc-auth-link">
+      </div>
+    </main>
 
-        Don't have an account?
-
-        <a href="signup.html">
-
-            Register
-
-        </a>
-
-    </div>
-
-</div>
+  </div>
 
 <script src="../js/api.js"></script>
 <script src="../js/auth.js"></script>
+<script>
+  // Lightweight UI-only enhancements. Does not touch auth logic in auth.js.
+  (function () {
+    var toggleBtn = document.getElementById('togglePassword');
+    var passwordInput = document.getElementById('password');
 
+    if (toggleBtn && passwordInput) {
+      toggleBtn.addEventListener('click', function () {
+        var isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        toggleBtn.setAttribute('aria-pressed', String(isPassword));
+        toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+        toggleBtn.querySelector('.gc-icon-eye').hidden = isPassword;
+        toggleBtn.querySelector('.gc-icon-eye-off').hidden = !isPassword;
+      });
+    }
+
+    var form = document.getElementById('loginForm');
+    var loginBtn = document.getElementById('loginBtn');
+
+    if (form && loginBtn) {
+      form.addEventListener('submit', function () {
+        // Purely visual loading state; auth.js still owns validation/submit.
+        loginBtn.classList.add('is-loading');
+        loginBtn.disabled = true;
+        window.setTimeout(function () {
+          loginBtn.classList.remove('is-loading');
+          loginBtn.disabled = false;
+        }, 4000); // safety timeout in case auth.js doesn't reset it
+      });
+    }
+  })();
+</script>
 </body>
 </html>

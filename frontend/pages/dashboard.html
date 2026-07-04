@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seller Dashboard | GenCampus Marketplace</title>
 
 <link rel="stylesheet" href="../css/main.css">
@@ -15,194 +10,130 @@ content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../css/components.css">
 <link rel="stylesheet" href="../css/dashboard.css">
 
+<!-- Lucide icon library -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 </head>
 
 <body>
 
-<!-- Overlay -->
-
 <div id="overlay" class="gc-overlay"></div>
 
 <header class="gc-header">
+  <div class="gc-container">
+    <div class="gc-dashboard-top">
+      <div class="gc-header-title">
+        <h1>Seller Dashboard</h1>
+        <p>Manage your marketplace listings</p>
+      </div>
 
-<div class="gc-container">
+      <div class="gc-dashboard-actions">
+        <div class="gc-search">
+          <i data-lucide="search" class="gc-search-icon"></i>
+          <input type="text" id="searchInput" placeholder="Search your products...">
+        </div>
 
-<div class="gc-dashboard-top">
+        <button id="requestBtn" class="gc-icon-btn" aria-label="Notifications">
+          <i data-lucide="bell"></i>
+          <span class="gc-badge">3</span>
+        </button>
 
-<div>
+        <button id="purchaseBtn" class="gc-icon-btn" aria-label="Purchases">
+          <i data-lucide="shopping-cart"></i>
+          <span class="gc-badge">2</span>
+        </button>
 
-<h1>Seller Dashboard</h1>
-
-<p>Manage your marketplace listings</p>
-
-</div>
-
-<div class="gc-dashboard-actions">
-
-<div class="gc-search">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search your products...">
-
-</div>
-
-<button
-id="requestBtn"
-class="gc-icon-btn">
-
-🔔
-
-<span class="gc-badge">
-
-3
-
-</span>
-
-</button>
-
-<button
-id="purchaseBtn"
-class="gc-icon-btn">
-
-🛒
-
-<span class="gc-badge">
-
-2
-
-</span>
-
-</button>
-
-<a
-href="sell.html"
-class="gc-btn gc-btn-primary">
-
-+ Add Product
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
+        <a href="sell.html" class="gc-btn gc-btn-primary">
+          <i data-lucide="plus"></i>
+          <span>Add product</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </header>
 
 <main class="gc-container">
 
-<section class="gc-stats">
+  <section class="gc-stats">
+    <div class="gc-stat-card">
+      <div class="gc-stat-icon gc-stat-icon--total">
+        <i data-lucide="package"></i>
+      </div>
+      <div>
+        <h2 id="totalProducts">0</h2>
+        <p>Total products</p>
+      </div>
+    </div>
 
-<div class="gc-stat-card">
+    <div class="gc-stat-card">
+      <div class="gc-stat-icon gc-stat-icon--available">
+        <i data-lucide="circle-check"></i>
+      </div>
+      <div>
+        <h2 id="availableProducts">0</h2>
+        <p>Available</p>
+      </div>
+    </div>
 
-<h2 id="totalProducts">
+    <div class="gc-stat-card">
+      <div class="gc-stat-icon gc-stat-icon--sold">
+        <i data-lucide="badge-indian-rupee"></i>
+      </div>
+      <div>
+        <h2 id="soldProducts">0</h2>
+        <p>Sold</p>
+      </div>
+    </div>
+  </section>
 
-0
+  <section class="gc-card">
+    <div class="gc-card-header">
+      <h3>Your listings</h3>
+    </div>
 
-</h2>
+    <table class="gc-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="dashboardTable"></tbody>
+    </table>
 
-<p>Total Products</p>
-
-</div>
-
-<div class="gc-stat-card">
-
-<h2 id="availableProducts">
-
-0
-
-</h2>
-
-<p>Available</p>
-
-</div>
-
-<div class="gc-stat-card">
-
-<h2 id="soldProducts">
-
-0
-
-</h2>
-
-<p>Sold</p>
-
-</div>
-
-</section>
-
-<section class="gc-card">
-
-<table class="gc-table">
-
-<thead>
-
-<tr>
-
-<th>Image</th>
-
-<th>Title</th>
-
-<th>Price</th>
-
-<th>Status</th>
-
-<th>Actions</th>
-
-</tr>
-
-</thead>
-
-<tbody id="dashboardTable">
-
-</tbody>
-
-</table>
-
-</section>
-
+    <!-- Empty state: toggle visibility from JS when dashboardTable has no rows -->
+    <div id="emptyState" class="gc-empty-state" hidden>
+      <i data-lucide="package-open"></i>
+      <h4>No products yet</h4>
+      <p>List your first item and it'll show up here.</p>
+      <a href="sell.html" class="gc-btn gc-btn-primary">
+        <i data-lucide="plus"></i>
+        <span>Add product</span>
+      </a>
+    </div>
+  </section>
 </main>
 
-<!-- ========================= -->
-<!-- RIGHT DRAWER -->
-<!-- ========================= -->
-
-<aside
-id="sideDrawer"
-class="gc-side-drawer">
-
-<div class="gc-drawer-header">
-
-<h2 id="drawerTitle">
-
-Notifications
-
-</h2>
-
-<button
-id="closeDrawer">
-
-✕
-
-</button>
-
-</div>
-
-<div
-id="drawerContent"
-class="gc-drawer-content">
-
-</div>
-
+<aside id="sideDrawer" class="gc-side-drawer">
+  <div class="gc-drawer-header">
+    <h2 id="drawerTitle">Notifications</h2>
+    <button id="closeDrawer" aria-label="Close panel">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+  <div id="drawerContent" class="gc-drawer-content"></div>
 </aside>
 
 <script src="../js/utils.js"></script>
 <script src="../js/api.js"></script>
 <script src="../js/dashboard.js"></script>
-
+<script>
+  // Render Lucide icons after the library loads
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) lucide.createIcons();
+  });
+</script>
 </body>
-
 </html>

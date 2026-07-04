@@ -85,7 +85,10 @@ function renderImageGrid() {
       <div class="gc-image-thumb">
         <img src="${img.url}" alt="Product photo ${index + 1}">
         ${index === 0 ? '<span class="gc-cover-tag">Cover</span>' : ""}
-        <button type="button" class="gc-remove-thumb" data-id="${img.id}" aria-label="Remove photo ${index + 1}">✕</button>
+      // in renderImageGrid(), replace the remove button line with:
+<button type="button" class="gc-remove-thumb" data-id="${img.id}" aria-label="Remove photo ${index + 1}">
+  <i class='bx bx-x'></i>
+</button>
       </div>
     `
     )

@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/sell.css">
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -21,7 +24,9 @@
         <p>List your item for other students in a couple of minutes.</p>
       </div>
     </div>
-    <a href="products.html" class="gc-back-link">&larr; Back to marketplace</a>
+    <a href="products.html" class="gc-back-link">
+      <i class='bx bx-left-arrow-alt'></i> Back to marketplace
+    </a>
   </header>
 
   <main class="gc-sell-layout">
@@ -40,7 +45,7 @@
 
         <div class="gc-dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload product photos">
           <input type="file" id="productImage" accept="image/*" multiple hidden>
-          <div class="gc-dropzone-icon">📷</div>
+          <i class='bx bx-image-add gc-dropzone-icon'></i>
           <p><strong>Click to upload</strong> or drag and drop</p>
           <span class="gc-dropzone-sub">PNG or JPG · up to 5 photos</span>
         </div>
@@ -153,7 +158,7 @@
       <div class="gc-preview-card" id="previewCard">
         <div class="gc-preview-image-wrap">
           <div class="gc-preview-placeholder" id="previewPlaceholder">
-            <span>🖼️</span>
+            <i class='bx bx-image'></i>
             <p>Your photo will appear here</p>
           </div>
           <img class="gc-preview-image" id="previewImage" alt="" hidden>

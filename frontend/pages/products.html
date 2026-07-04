@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="../css/layout.css">
   <link rel="stylesheet" href="../css/components.css">
   <link rel="stylesheet" href="../css/products.css">
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -22,13 +25,14 @@
     </div>
 
     <a href="sell.html" class="gc-btn-sell">
-      <span>+</span> List an item
+      <i class='bx bx-plus'></i>
+      <span>List an item</span>
     </a>
   </header>
 
   <section class="gc-filters">
     <div class="search-wrapper">
-      <span aria-hidden="true">🔍</span>
+      <i class='bx bx-search' aria-hidden="true"></i>
       <input type="text" id="searchInput" placeholder="Search products, brands, and categories..." aria-label="Search products">
     </div>
 
@@ -56,17 +60,21 @@
 
   <div class="gc-filter-meta">
     <span id="resultsCount" aria-live="polite"></span>
-    <button id="clearFilters" class="gc-clear-btn" hidden>Clear all filters</button>
+    <button id="clearFilters" class="gc-clear-btn" hidden>
+      <i class='bx bx-x'></i> Clear all filters
+    </button>
   </div>
 
   <main class="container">
     <div class="products-grid" id="productsGrid"></div>
 
     <div class="gc-empty-state" id="emptyState" hidden>
-      <div class="gc-empty-icon">🔎</div>
+      <i class='bx bx-search-alt gc-empty-icon'></i>
       <h3>No items match your filters</h3>
       <p>Try a different keyword, category, or price range.</p>
-      <button class="gc-btn gc-btn-primary" id="emptyStateClear">Clear all filters</button>
+      <button class="gc-btn gc-btn-primary" id="emptyStateClear">
+        <i class='bx bx-x'></i> Clear all filters
+      </button>
     </div>
   </main>
 

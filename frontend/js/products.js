@@ -176,15 +176,14 @@ function renderProducts(data) {
               <span class="status ${isSold ? "sold" : "available"}">${isSold ? "Sold out" : "Available"}</span>
             </div>
             <img src="${product.image}" alt="${product.title}" loading="lazy">
-            <button
-              class="wishlist-btn ${isLiked ? "is-active" : ""}"
-              data-id="${product.id}"
-              aria-pressed="${isLiked}"
-              aria-label="${isLiked ? "Remove from wishlist" : "Add to wishlist"}">
-              <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"></path>
-              </svg>
-            </button>
+           // replace the wishlist button markup with:
+<button
+  class="wishlist-btn ${isLiked ? "is-active" : ""}"
+  data-id="${product.id}"
+  aria-pressed="${isLiked}"
+  aria-label="${isLiked ? "Remove from wishlist" : "Add to wishlist"}">
+  <i class='${isLiked ? "bx bxs-heart" : "bx bx-heart"}'></i>
+</button>
           </div>
 
           <div class="product-info">
@@ -307,3 +306,12 @@ productsGrid.addEventListener("click", (event) => {
 // ------------------------------
 renderSkeletons(4);
 setTimeout(applyFilters, 350);
+
+function starString(rating) {
+  let out = '<span class="stars">';
+  for (let i = 1; i <= 5; i++) {
+    out += `<i class='${i <= rating ? "bx bxs-star" : "bx bx-star"}'></i>`;
+  }
+  return out + "</span>";
+}
+

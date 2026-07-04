@@ -1,13 +1,42 @@
 /* ==========================================
    GenCampus Marketplace
-   Sell Product Page
+   Sell Product Page — Zoho-inspired
+   White + Green, Inter, calm hierarchy
 ========================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
 :root {
-    --sell-danger: #EF4444;
-    --sell-danger-bg: #FEF2F2;
-    --sell-success: #10B981;
-    --sell-success-bg: #ECFDF5;
+    --primary: #1F9D55;
+    --primary-dark: #17803D;
+    --primary-soft: #EAFBF1;
+
+    --surface: #FFFFFF;
+    --surface-muted: #FAFBFA;
+    --border: #E9ECEB;
+    --border-hover: #D7DBD9;
+
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --text-light: #9CA3AF;
+
+    --sell-danger: #E11D48;
+    --sell-danger-bg: #FEF1F3;
+    --sell-success: #1F9D55;
+    --sell-success-bg: #EAFBF1;
+
+    --shadow: 0 1px 2px rgba(16,24,22,.04);
+    --shadow-md: 0 6px 16px rgba(16,24,22,.06);
+
+    --transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-main);
+    background: var(--surface-muted);
 }
 
 /* ==========================
@@ -15,9 +44,9 @@ Header
 ========================== */
 
 .gc-header {
-    background: var(--surface, #FFFFFF);
-    padding: 18px 32px;
-    box-shadow: var(--shadow);
+    background: var(--surface);
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -32,33 +61,40 @@ Header
 }
 
 .gc-brand-mark {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
-    border-radius: 50%;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary, #4F46E5);
-    color: white;
-    font-weight: 700;
-    font-size: 17px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
 }
 
-.gc-brand h1 { font-size: 19px; }
+.gc-brand h1 { font-size: 16px; font-weight: 500; }
 
 .gc-brand p {
     font-size: 13px;
-    color: var(--text-light);
+    color: var(--text-muted);
     margin-top: 2px;
 }
 
 .gc-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 13.5px;
-    font-weight: 600;
-    color: var(--text-light);
+    font-weight: 500;
+    color: var(--text-muted);
     white-space: nowrap;
+    text-decoration: none;
+    transition: var(--transition);
 }
+
+.gc-back-link i { font-size: 16px; }
 
 .gc-back-link:hover { color: var(--primary); }
 
@@ -69,10 +105,10 @@ Two-column layout
 .gc-sell-layout {
     max-width: 1160px;
     margin: 32px auto 64px;
-    padding: 0 24px;
+    padding: 0 40px;
     display: flex;
     align-items: flex-start;
-    gap: 32px;
+    gap: 28px;
 }
 
 .gc-sell-form-panel {
@@ -90,8 +126,14 @@ Two-column layout
 }
 
 /* ==========================
-Form sections
+Cards / form sections
 ========================== */
+
+.gc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
 
 .gc-form-section { padding: 26px; }
 
@@ -109,18 +151,17 @@ Form sections
     width: 26px;
     height: 26px;
     border-radius: 7px;
-    background: rgba(79, 70, 229, 0.1);
+    background: var(--primary-soft);
     color: var(--primary);
     font-size: 12px;
-    font-weight: 700;
-    font-family: monospace;
+    font-weight: 500;
 }
 
-.gc-section-head h2 { font-size: 17px; font-weight: 700; }
+.gc-section-head h2 { font-size: 15.5px; font-weight: 500; }
 
 .gc-section-hint {
-    color: var(--text-light);
-    font-size: 13.5px;
+    color: var(--text-muted);
+    font-size: 13px;
     margin: 6px 0 18px;
 }
 
@@ -134,8 +175,8 @@ Form sections
 
 .gc-form-group label {
     margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 13.5px;
 }
 
 .gc-optional { font-weight: 400; color: var(--text-light); }
@@ -144,6 +185,36 @@ Form sections
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+}
+
+/* Inputs */
+
+.gc-input,
+.gc-select,
+.gc-textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-main);
+    background: var(--surface-muted);
+    transition: var(--transition);
+    outline: none;
+}
+
+.gc-input:hover,
+.gc-select:hover,
+.gc-textarea:hover { border-color: var(--border-hover); }
+
+.gc-input:focus,
+.gc-select:focus,
+.gc-textarea:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
 .gc-textarea { resize: vertical; min-height: 120px; }
@@ -174,32 +245,28 @@ Form sections
     margin-top: 6px;
 }
 
-/* Invalid state on inputs */
 .gc-input.is-invalid,
 .gc-select.is-invalid,
-.gc-textarea.is-invalid {
-    border-color: var(--sell-danger);
-}
+.gc-textarea.is-invalid { border-color: var(--sell-danger); }
 
 .gc-input.is-invalid:focus,
 .gc-select.is-invalid:focus,
 .gc-textarea.is-invalid:focus {
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+    box-shadow: 0 0 0 3px var(--sell-danger-bg);
 }
 
 /* Price input with ₹ prefix */
 
 .gc-input-wrap { position: relative; }
-
 .gc-input-wrap--prefix .gc-input { padding-left: 30px; }
 
 .gc-input-prefix {
     position: absolute;
     top: 50%;
-    left: 12px;
+    left: 13px;
     transform: translateY(-50%);
     color: var(--text-light);
-    font-size: 15px;
+    font-size: 14px;
     pointer-events: none;
 }
 
@@ -208,30 +275,36 @@ Dropzone + image grid
 ========================== */
 
 .gc-dropzone {
-    border: 2px dashed var(--border);
+    border: 1.5px dashed var(--border);
     border-radius: 12px;
-    padding: 32px 20px;
+    padding: 34px 20px;
     text-align: center;
-    background: #FAFAFA;
+    background: var(--surface-muted);
     cursor: pointer;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: var(--transition);
 }
 
 .gc-dropzone:hover,
 .gc-dropzone:focus-visible {
     border-color: var(--primary);
-    background: rgba(79, 70, 229, 0.03);
+    background: var(--primary-soft);
     outline: none;
 }
 
 .gc-dropzone.is-dragover {
     border-color: var(--primary);
-    background: rgba(79, 70, 229, 0.06);
+    background: var(--primary-soft);
 }
 
-.gc-dropzone-icon { font-size: 26px; margin-bottom: 8px; }
+.gc-dropzone-icon {
+    display: block;
+    font-size: 28px;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
 
-.gc-dropzone p { font-size: 14px; color: var(--text-main); }
+.gc-dropzone p { font-size: 14px; color: var(--text-main); font-weight: 400; }
+.gc-dropzone p strong { font-weight: 500; }
 
 .gc-dropzone-sub {
     display: block;
@@ -264,36 +337,36 @@ Dropzone + image grid
 
 .gc-image-thumb .gc-cover-tag {
     position: absolute;
-    bottom: 4px;
-    left: 4px;
-    background: rgba(17, 24, 39, 0.75);
+    bottom: 5px;
+    left: 5px;
+    background: rgba(31, 41, 55, .78);
     color: #fff;
     font-size: 9.5px;
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    padding: 2px 6px;
+    letter-spacing: .03em;
+    padding: 2px 7px;
     border-radius: 4px;
 }
 
 .gc-image-thumb .gc-remove-thumb {
     position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 20px;
-    height: 20px;
+    top: 5px;
+    right: 5px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: none;
-    background: rgba(17, 24, 39, 0.75);
+    background: rgba(31, 41, 55, .78);
     color: #fff;
-    font-size: 12px;
-    line-height: 1;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: var(--transition);
 }
 
+.gc-image-thumb .gc-remove-thumb i { font-size: 13px; }
 .gc-image-thumb .gc-remove-thumb:hover { background: var(--sell-danger); }
 
 /* ==========================
@@ -307,18 +380,19 @@ Condition chips
 }
 
 .gc-chip {
-    padding: 9px 16px;
+    padding: 9px 18px;
     border-radius: 999px;
-    border: 1.5px solid var(--border);
+    border: 1px solid var(--border);
     background: var(--surface);
     color: var(--text-main);
+    font-family: 'Inter', sans-serif;
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: var(--transition);
 }
 
-.gc-chip:hover { border-color: var(--border-hover, #D1D5DB); }
+.gc-chip:hover { border-color: var(--border-hover); background: var(--surface-muted); }
 
 .gc-chip:focus-visible {
     outline: 2px solid var(--primary);
@@ -329,6 +403,7 @@ Condition chips
     background: var(--primary);
     border-color: var(--primary);
     color: #fff;
+    font-weight: 500;
 }
 
 /* ==========================
@@ -343,11 +418,33 @@ Form-level feedback banner
 }
 
 .gc-form-feedback.is-error   { background: var(--sell-danger-bg); color: var(--sell-danger); }
-.gc-form-feedback.is-success { background: var(--sell-success-bg); color: #0F7A54; }
+.gc-form-feedback.is-success { background: var(--sell-success-bg); color: var(--primary-dark); }
 
 /* ==========================
 Submit button
 ========================== */
+
+.gc-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    padding: 11px 20px;
+}
+
+.gc-btn-primary:hover { background: var(--primary-dark); }
+
+.w-100 { width: 100%; }
 
 .gc-btn-submit {
     display: flex;
@@ -356,22 +453,22 @@ Submit button
     gap: 10px;
     margin-top: 4px;
     padding: 14px;
-    font-size: 15px;
+    font-size: 14.5px;
 }
 
 .gc-spinner-sm {
     display: none;
     width: 15px;
     height: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255,255,255,.4);
     border-top-color: #fff;
     border-radius: 50%;
 }
 
-.gc-btn-submit.is-loading .gc-btn-text { opacity: 0.7; }
+.gc-btn-submit.is-loading .gc-btn-text { opacity: .7; }
 .gc-btn-submit.is-loading .gc-spinner-sm {
     display: inline-block;
-    animation: gc-sell-spin 0.7s linear infinite;
+    animation: gc-sell-spin .7s linear infinite;
 }
 
 @keyframes gc-sell-spin { to { transform: rotate(360deg); } }
@@ -381,10 +478,10 @@ Live preview card
 ========================== */
 
 .gc-preview-label {
-    font-size: 12.5px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: .05em;
     color: var(--text-light);
     margin-bottom: 10px;
 }
@@ -401,7 +498,7 @@ Live preview card
     position: relative;
     width: 100%;
     padding-top: 80%;
-    background: #F3F4F6;
+    background: var(--surface-muted);
 }
 
 .gc-preview-placeholder {
@@ -411,12 +508,12 @@ Live preview card
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 8px;
     color: var(--text-light);
     font-size: 13px;
 }
 
-.gc-preview-placeholder span { font-size: 28px; }
+.gc-preview-placeholder i { font-size: 30px; color: var(--border-hover); }
 
 .gc-preview-image {
     position: absolute;
@@ -430,41 +527,44 @@ Live preview card
     position: absolute;
     top: 10px;
     left: 10px;
-    background: rgba(255, 255, 255, 0.92);
-    padding: 3px 9px;
-    border-radius: 6px;
-    font-size: 10.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    background: rgba(255,255,255,.94);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
 }
 
-.gc-preview-body { padding: 14px 16px 18px; }
+.gc-preview-body { padding: 16px 18px 20px; }
 
 .gc-preview-condition {
     display: inline-block;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 20px;
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 10.5px;
+    font-weight: 500;
     text-transform: uppercase;
     background: var(--sell-success-bg);
-    color: #0F7A54;
-    margin-bottom: 8px;
+    color: var(--primary-dark);
+    margin-bottom: 9px;
 }
 
 .gc-preview-title {
     font-size: 14.5px;
-    font-weight: 600;
-    line-height: 1.4;
+    font-weight: 500;
+    line-height: 1.5;
     margin-bottom: 6px;
 }
 
 .gc-preview-location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-size: 12.5px;
-    color: var(--text-light);
+    color: var(--text-muted);
     margin-bottom: 10px;
 }
+
+.gc-preview-location i { font-size: 13px; color: var(--text-light); }
 
 .gc-preview-price-row {
     display: flex;
@@ -473,10 +573,7 @@ Live preview card
     flex-wrap: wrap;
 }
 
-.gc-preview-price {
-    font-size: 19px;
-    font-weight: 700;
-}
+.gc-preview-price { font-size: 18px; font-weight: 600; }
 
 .gc-preview-original-price {
     font-size: 13px;
@@ -484,11 +581,7 @@ Live preview card
     text-decoration: line-through;
 }
 
-.gc-preview-discount {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--sell-success);
-}
+.gc-preview-discount { font-size: 12px; font-weight: 500; color: var(--primary); }
 
 .gc-preview-hint {
     font-size: 12px;
@@ -502,13 +595,19 @@ Responsive
 ========================== */
 
 @media (max-width: 900px) {
-    .gc-sell-layout { flex-direction: column; }
+    .gc-sell-layout { flex-direction: column; padding: 0 24px; }
     .gc-sell-preview-panel { position: static; width: 100%; }
+    .gc-header { padding: 16px 24px; }
 }
 
 @media (max-width: 640px) {
     .gc-form-row { grid-template-columns: 1fr; }
-    .gc-sell-layout { padding: 0 16px; margin: 20px auto 48px; }
+    .gc-sell-layout { padding: 0 16px; margin: 20px auto 48px; gap: 20px; }
     .gc-form-section { padding: 20px; }
-    .gc-header { padding: 16px 20px; }
+    .gc-header { padding: 14px 16px; }
+    .gc-brand p { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
 }

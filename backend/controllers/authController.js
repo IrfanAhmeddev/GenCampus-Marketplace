@@ -8,56 +8,74 @@ const supabase = require("../config/supabaseClient");
  */
 
 exports.signup = async (req, res) => {
-  try {
-    const { email, password, full_name, college_name } = req.body;
+    try {
 
-    // Validation
-    if (!email || !password || !full_name || !college_name) {
-      return res.status(400).json({
-        success: false,
-        error: "All fields are required."
-      });
-    }
+        const {
+            full_name,
+            email,
+            password,
+            phone,
+            college_id
+        } = req.body;
 
-  // Email Validation
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-if (!emailRegex.test(email)) {
-    return res.status(400).json({
-        success: false,
-        error: "Please enter a valid email address."
-    });
-}
-
-    // Create user in Supabase Auth
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name,
-          college_name
+        // Validation
+        if (!full_name || !email || !password) {
+            return res.status(400).json({
+                success: false,
+                error: "Full name, email and password are required."
+            });
         }
-      }
-    });
 
-    if (error) throw error;
+        // Create Auth User
+        const { data: authData, error: authError } =
+            await supabase.auth.admin.createUser({
 
-    return res.status(201).json({
-      success: true,
-      message: "Registration successful. Please verify your email.",
-      user: data.user,
-      session: data.session
-    });
+                email,
+                password,
+                email_confirm: true
 
-  } catch (err) {
+            });
 
-    return res.status(500).json({
-      success: false,
-      error: err.message
-    });
+        if (authError) {
+            throw authError;
+        }
 
-  }
+        const user = authData.user;
+
+        // Insert Profile
+        const { error: profileError } = await supabase
+            .from("profiles")
+            .insert([
+                {
+                    id: user.id,
+                    full_name,
+                    email,
+                    phone: phone || null,
+                    college_id: college_id || null
+                }
+            ]);
+
+        if (profileError) {
+            throw profileError;
+        }
+
+        res.status(201).json({
+            success: true,
+            message: "Registration successful",
+            user: {
+                id: user.id,
+                email: user.email
+            }
+        });
+
+    } catch (err) {
+
+        res.status(500).json({
+            success: false,
+            error: err.message
+        });
+
+    }
 };
 
 /**
@@ -69,83 +87,68 @@ if (!emailRegex.test(email)) {
 
 exports.login = async (req, res) => {
 
-  try {
+    try {
 
-    const { email, password } = req.body;
+        const { email, password } = req.body;
 
-    if (!email || !password) {
+        if (!email || !password) {
 
-      return res.status(400).json({
+            return res.status(400).json({
+                success: false,
+                error: "Email and Password are required."
+            });
 
-        success:false,
+        }
 
-        error:"Email and Password are required."
+        const { data, error } =
+            await supabase.auth.signInWithPassword({
 
-      });
+                email,
+                password
+
+            });
+
+        if (error) {
+
+            return res.status(401).json({
+                success: false,
+                error: "Invalid Credentials"
+            });
+
+        }
+
+        const { data: profile } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", data.user.id)
+            .single();
+
+        return res.status(200).json({
+
+            success: true,
+
+            token: data.session.access_token,
+
+            user: {
+
+                id: data.user.id,
+                email: data.user.email,
+                profile
+
+            }
+
+        });
+
+    } catch (err) {
+
+        return res.status(500).json({
+
+            success: false,
+            error: err.message
+
+        });
 
     }
-
-    const { data, error } =
-      await supabase.auth.signInWithPassword({
-
-        email,
-
-        password
-
-      });
-
-    if (error) {
-
-      return res.status(401).json({
-
-        success:false,
-
-        error:"Invalid Credentials"
-
-      });
-
-    }
-
-    // Fetch Profile
-
-    const { data: profile } =
-      await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", data.user.id)
-      .single();
-
-    return res.status(200).json({
-
-      success:true,
-
-      token:data.session.access_token,
-
-      user:{
-
-        id:data.user.id,
-
-        email:data.user.email,
-
-        profile
-
-      }
-
-    });
-
-  }
-
-  catch(err){
-
-    return res.status(500).json({
-
-      success:false,
-
-      error:err.message
-
-    });
-
-  }
 
 };
 
@@ -156,30 +159,26 @@ exports.login = async (req, res) => {
  * ==========================================
  */
 
-exports.getMe = async (req,res)=>{
+exports.getMe = async (req, res) => {
 
-  try{
+    try {
 
-    return res.status(200).json({
+        return res.status(200).json({
 
-      success:true,
+            success: true,
+            user: req.user
 
-      user:req.user
+        });
 
-    });
+    } catch (err) {
 
-  }
+        return res.status(500).json({
 
-  catch(err){
+            success: false,
+            error: err.message
 
-    return res.status(500).json({
+        });
 
-      success:false,
-
-      error:err.message
-
-    });
-
-  }
+    }
 
 };

@@ -1,70 +1,34 @@
 const supabase = require("../config/supabaseClient");
 
-// ==========================================
-// Authentication Middleware
-// ==========================================
-
 exports.protect = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
 
-    try {
-
-        // Get Authorization Header
-        const authHeader = req.headers.authorization;
-
-        // Check if token exists
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
-
-            return res.status(401).json({
-
-                success: false,
-
-                error: "Not authorized. No token provided."
-
-            });
-
-        }
-
-        // Extract JWT Token
-        const token = authHeader.split(" ")[1];
-
-        // Verify User with Supabase
-        const {
-
-            data: { user },
-
-            error
-
-        } = await supabase.auth.getUser(token);
-
-        if (error || !user) {
-
-            return res.status(401).json({
-
-                success: false,
-
-                error: "Invalid or expired token."
-
-            });
-
-        }
-
-        // Store Authenticated User
-        req.user = user;
-
-        next();
-
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(401).json({
+        success: false,
+        error: "No token provided"
+      });
     }
 
-    catch (err) {
+    const token = authHeader.split(" ")[1];
 
-        return res.status(500).json({
+    const { data, error } = await supabase.auth.getUser(token);
 
-            success: false,
-
-            error: err.message
-
-        });
-
+    if (error || !data.user) {
+      return res.status(401).json({
+        success: false,
+        error: "Invalid token"
+      });
     }
 
+    req.user = data.user;
+    next();
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
 };

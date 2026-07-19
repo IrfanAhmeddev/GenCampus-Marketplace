@@ -1,0 +1,252 @@
+/* =========================================================
+   mobile.css
+   Mobile-responsive overrides for GenCampus Marketplace.
+   Load this AFTER main.css / layout.css / components.css /
+   products.css so these rules win on cascade + specificity.
+   ========================================================= */
+
+/* -------------------------------------------------
+   0. Global safety net — prevents horizontal scroll
+   and the classic "iOS zooms in when I tap an input"
+   problem (that happens whenever an input/select has
+   font-size < 16px, Safari auto-zooms to compensate).
+   ------------------------------------------------- */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+input, select, textarea, button {
+  font-size: 16px !important; /* stops iOS Safari auto-zoom on focus */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   NAVBAR — hamburger menu below 768px
+   ========================================================= */
+@media (max-width: 768px) {
+
+  .gc-navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 10px 16px;
+    position: relative;
+  }
+
+  .gc-brand-name {
+    font-size: 16px;
+  }
+
+  /* Hide the desktop inline nav links; they move into the
+     slide-down mobile panel instead */
+  .gc-nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    display: none;
+    z-index: 50;
+  }
+
+  .gc-nav-links.is-open {
+    display: flex;
+  }
+
+  .gc-nav-links .gc-nav-link {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+  }
+
+  /* Search bar: hide inline, becomes a full-width row that
+     drops below the navbar when toggled open */
+  .gc-navbar-search {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    background: #fff;
+    padding: 10px 16px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    z-index: 40;
+  }
+
+  .gc-navbar-search.is-open {
+    display: flex;
+  }
+
+  .gc-navbar-search input {
+    width: 100%;
+  }
+
+  .gc-navbar-actions {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Hamburger + search-toggle buttons, injected by mobile.js */
+  .gc-mobile-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .gc-avatar-dropdown {
+    right: 0;
+    left: auto;
+  }
+}
+
+/* On desktop/tablet, make sure the injected mobile-only
+   buttons never show up */
+@media (min-width: 769px) {
+  .gc-mobile-toggle {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   HERO — stack content, shrink board, tighten spacing
+   ========================================================= */
+@media (max-width: 900px) {
+  .gc-hero-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 16px;
+    gap: 24px;
+  }
+
+  .gc-hero-heading {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .gc-hero-sub {
+    font-size: 15px;
+  }
+
+  .gc-hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gc-btn-hero-primary,
+  .gc-btn-hero-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gc-trust-row {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+
+  .gc-hero-board {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    transform: none;
+  }
+
+  .gc-note {
+    position: static;
+    transform: none !important;
+    flex: 1 1 140px;
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 420px) {
+  .gc-hero-board {
+    display: none; /* keep it clean on very small phones */
+  }
+}
+
+/* =========================================================
+   FILTERS — stack full width
+   ========================================================= */
+@media (max-width: 768px) {
+  .gc-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+  }
+
+  .gc-filters select,
+  .gc-filters .price-filter,
+  .gc-filters #sortFilter {
+    width: 100%;
+  }
+
+  .price-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .price-filter input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .gc-filter-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0 16px;
+  }
+}
+
+/* =========================================================
+   PRODUCTS GRID — single column on phones,
+   two columns on small tablets
+   ========================================================= */
+@media (max-width: 640px) {
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+    padding: 0 16px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* =========================================================
+   CONTAINER — consistent side padding on mobile
+   ========================================================= */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .gc-empty-state {
+    padding: 32px 16px;
+  }
+}

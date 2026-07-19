@@ -15,27 +15,107 @@
 </head>
 <body>
 
-  <header class="gc-header">
-    <div class="gc-brand">
-      <span class="gc-brand-mark">GC</span>
-      <div>
-        <h1>GenCampus Marketplace</h1>
-        <p>Buy and sell within your campus community</p>
-      </div>
-    </div>
+  <!-- ========================= -->
+  <!-- NAVBAR -->
+  <!-- ========================= -->
+  <header class="gc-navbar">
+    <div class="gc-navbar-inner">
 
-    <a href="sell.html" class="gc-btn-sell">
-      <i class='bx bx-plus'></i>
-      <span>List an item</span>
-    </a>
+      <a href="products.html" class="gc-brand">
+        <span class="gc-brand-mark">GC</span>
+        <span class="gc-brand-name">GenCampus</span>
+      </a>
+
+      <nav class="gc-nav-links" aria-label="Primary">
+        <a href="products.html" class="gc-nav-link is-active">Home</a>
+        <a href="#filtersSection" class="gc-nav-link">Categories</a>
+        <a href="sell.html" class="gc-nav-link">Sell</a>
+      </nav>
+
+      <div class="gc-navbar-actions">
+        <div class="search-wrapper gc-navbar-search">
+          <i class='bx bx-search' aria-hidden="true"></i>
+          <input type="text" id="searchInput" placeholder="Search the marketplace..." aria-label="Search products">
+        </div>
+
+        <div class="gc-user-menu">
+          <button class="gc-avatar-btn" id="avatarBtn" aria-haspopup="true" aria-expanded="false">
+            <span class="gc-avatar">AK</span>
+            <i class='bx bx-chevron-down'></i>
+          </button>
+
+          <div class="gc-avatar-dropdown" id="avatarDropdown" hidden>
+            <a href="dashboard.html" class="gc-dropdown-item">
+              <i class='bx bx-grid-alt'></i> My dashboard
+            </a>
+            <a href="#" class="gc-dropdown-item">
+              <i class='bx bx-heart'></i> Wishlist
+            </a>
+            <a href="#" class="gc-dropdown-item">
+              <i class='bx bx-cog'></i> Settings
+            </a>
+            <div class="gc-dropdown-divider"></div>
+            <a href="login.html" class="gc-dropdown-item gc-dropdown-item--danger">
+              <i class='bx bx-log-out'></i> Log out
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </header>
 
-  <section class="gc-filters">
-    <div class="search-wrapper">
-      <i class='bx bx-search' aria-hidden="true"></i>
-      <input type="text" id="searchInput" placeholder="Search products, brands, and categories..." aria-label="Search products">
-    </div>
+  <!-- ========================= -->
+  <!-- HERO BANNER -->
+  <!-- ========================= -->
+  <section class="gc-hero">
+    <div class="gc-hero-inner">
 
+      <div class="gc-hero-content">
+        <span class="gc-hero-eyebrow">GenCampus Marketplace</span>
+        <h1 class="gc-hero-heading">Everything your<br>campus is selling,<br>in one place.</h1>
+        <p class="gc-hero-sub">
+          From textbooks to bicycles — buy and sell directly with students you actually go to college with. No shipping, no strangers.
+        </p>
+
+        <div class="gc-hero-actions">
+          <a href="sell.html" class="gc-btn-hero-primary">
+            <i class='bx bx-plus'></i> List an item
+          </a>
+          <a href="#filtersSection" class="gc-btn-hero-secondary">Browse everything</a>
+        </div>
+
+        <div class="gc-trust-row">
+          <span class="gc-trust-item">1,200+ listings</span>
+          <span class="gc-trust-item">40+ campuses</span>
+          <span class="gc-trust-item">4.8 avg rating</span>
+        </div>
+      </div>
+
+      <div class="gc-hero-board" aria-hidden="true">
+        <div class="gc-note gc-note--1">
+          <span class="gc-note-pin"></span>
+          <span class="gc-note-tag">Textbooks</span>
+          <p class="gc-note-title">Theory of Computation</p>
+          <span class="gc-note-price">₹450</span>
+        </div>
+
+        <div class="gc-note gc-note--2 gc-note--sold">
+          <span class="gc-note-pin"></span>
+          <span class="gc-note-tag">Calculator</span>
+          <p class="gc-note-title">fx-991ES Plus</p>
+          <span class="gc-note-price">₹300</span>
+          <span class="gc-note-stamp">SOLD</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- FILTERS -->
+  <!-- ========================= -->
+  <section class="gc-filters" id="filtersSection">
     <select id="categoryFilter" aria-label="Filter by category">
       <option value="">All categories</option>
       <option value="Books">Books</option>
@@ -80,5 +160,33 @@
 
   <script src="../js/api.js"></script>
   <script src="../js/products.js"></script>
+  <script>
+    // Avatar dropdown — UI only, self-contained like auth.js's pattern
+    (function () {
+      var btn = document.getElementById('avatarBtn');
+      var menu = document.getElementById('avatarDropdown');
+      if (!btn || !menu) return;
+
+      function closeMenu() {
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      }
+
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = !menu.hidden;
+        menu.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) closeMenu();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
 </body>
 </html>

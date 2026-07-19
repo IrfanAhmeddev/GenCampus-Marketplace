@@ -291,43 +291,108 @@ function validateForm() {
 
 sellForm.addEventListener("submit", handleSellProduct);
 
-function handleSellProduct(event) {
+
+  
+
+async function handleSellProduct(event) {
+
   event.preventDefault();
   hideFormFeedback();
 
   const firstInvalid = validateForm();
+
   if (firstInvalid) {
     showFormFeedback("Please fix the highlighted fields before publishing.", "error");
     firstInvalid.focus({ preventScroll: true });
-    firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+    firstInvalid.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
     return;
   }
-
-  const product = {
-    title: titleInput.value.trim(),
-    description: descriptionInput.value.trim(),
-    category: categorySelect.value,
-    price: Number(priceInput.value),
-    originalPrice: originalPriceInput.value ? Number(originalPriceInput.value) : null,
-    condition: selectedCondition,
-    location: locationInput.value.trim(),
-    images: images.map((img) => img.file.name)
-  };
-
-  console.log(product);
-
-  // Backend integration:
-  // await apiRequest(API_ENDPOINTS.products, { method: "POST", body: product });
 
   publishBtn.classList.add("is-loading");
   publishBtn.disabled = true;
 
-  setTimeout(() => {
+try {
+
+    const formData = new FormData();
+
+    formData.append(
+        "title",
+        titleInput.value.trim()
+    );
+
+    formData.append(
+        "description",
+        descriptionInput.value.trim()
+    );
+
+    formData.append(
+        "category",
+        categorySelect.value
+    );
+
+    formData.append(
+        "price",
+        Number(priceInput.value)
+    );
+
+
+    // Upload first image
+    if (images.length > 0) {
+
+        formData.append(
+            "image",
+            images[0].file
+        );
+
+    }
+
+
+    console.log("Sending FormData");
+
+
+    const response = await apiRequest(
+        API_ENDPOINTS.products,
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+
+    console.log(
+        "Product Created:",
+        response
+    );
+
+
+    showFormFeedback(
+        "Product uploaded successfully!",
+        "success"
+    );
+
+
+    resetForm();
+
+
+} catch (error) {
+
+    console.error(error);
+
+    showFormFeedback(
+      error.message,
+      "error"
+    );
+
+  } finally {
+
     publishBtn.classList.remove("is-loading");
     publishBtn.disabled = false;
-    showFormFeedback("Listing published! Buyers on your campus can now see it.", "success");
-    resetForm();
-  }, 900);
+
+  }
+
 }
 
 function resetForm() {

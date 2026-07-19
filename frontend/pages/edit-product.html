@@ -1,183 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Product | GenCampus Marketplace</title>
 
-    <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sell.css">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Edit Product | GenCampus Marketplace</title>
-
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/sell.css">
-
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
-
 <body>
 
-<header class="gc-header">
-
-    <div class="gc-container gc-flex-between">
-
-        <div>
-
-            <h1>Edit Product</h1>
-
-            <p>Update your marketplace listing</p>
-
-        </div>
-
-        <a href="dashboard.html"
-           class="gc-btn gc-btn-secondary">
-
-            ← Dashboard
-
-        </a>
-
+  <!-- ========================= -->
+  <!-- HEADER -->
+  <!-- ========================= -->
+  <header class="gc-header">
+    <div class="gc-brand">
+      <span class="gc-brand-mark"><i class='bx bx-pencil'></i></span>
+      <div>
+        <h1>Edit product</h1>
+        <p>Update the details of your marketplace listing</p>
+      </div>
     </div>
 
-</header>
+    <a href="dashboard.html" class="gc-back-link">
+      <i class='bx bx-arrow-back'></i> Back to dashboard
+    </a>
+  </header>
 
-<main class="gc-container">
+  <!-- ========================= -->
+  <!-- MAIN LAYOUT -->
+  <!-- ========================= -->
+  <div class="gc-sell-layout">
 
-<form id="editProductForm"
-      class="gc-sell-form">
+    <form id="editProductForm" class="gc-sell-form-panel" novalidate>
 
-<input type="hidden"
-       id="productId">
+      <input type="hidden" id="productId">
 
-<div class="gc-form-group">
+      <div id="formFeedback" class="gc-form-feedback" hidden></div>
 
-<label>Current Product Image</label>
+      <!-- ===== Photo ===== -->
+      <div class="gc-card">
+        <div class="gc-form-section">
 
-<img
-id="imagePreview"
-src="https://via.placeholder.com/300x220"
-class="gc-image-preview">
+          <div class="gc-section-head">
+            <span class="gc-step-num">1</span>
+            <h2>Product photo</h2>
+          </div>
+          <p class="gc-section-hint">Keep the current photo or upload a new one.</p>
 
-</div>
+          <div class="gc-form-group">
+            <div class="gc-dropzone" id="dropzone" tabindex="0" role="button" aria-label="Replace product image">
+              <i class='bx bx-image-add gc-dropzone-icon'></i>
+              <p><strong>Click to replace</strong> or drag a new photo here</p>
+              <span class="gc-dropzone-sub">PNG or JPG, up to 5MB</span>
+            </div>
+            <input type="file" id="productImage" accept="image/*" hidden>
 
-<div class="gc-form-group">
+            <div class="gc-image-grid">
+              <div class="gc-image-thumb">
+                <img id="imagePreview" src="https://via.placeholder.com/300x220" alt="Current product image">
+                <span class="gc-cover-tag">Current</span>
+              </div>
+            </div>
+          </div>
 
-<label>Replace Image</label>
+        </div>
+      </div>
 
-<input
-type="file"
-id="productImage"
-accept="image/*">
+      <!-- ===== Details ===== -->
+      <div class="gc-card">
+        <div class="gc-form-section">
 
-</div>
+          <div class="gc-section-head">
+            <span class="gc-step-num">2</span>
+            <h2>Product details</h2>
+          </div>
+          <p class="gc-section-hint">Basics buyers see first.</p>
 
-<div class="gc-form-group">
+          <div class="gc-form-group">
+            <label for="title">Product name</label>
+            <input type="text" id="title" class="gc-input" required>
+            <span class="gc-field-error"></span>
+          </div>
 
-<label>Product Name</label>
+          <div class="gc-form-row">
+            <div class="gc-form-group">
+              <label for="category">Category</label>
+              <select id="category" class="gc-select">
+                <option>Books</option>
+                <option>Electronics</option>
+                <option>Furniture</option>
+                <option>Accessories</option>
+              </select>
+            </div>
 
-<input
-type="text"
-id="title"
-required>
+            <div class="gc-form-group">
+              <label for="price">Price</label>
+              <div class="gc-input-wrap gc-input-wrap--prefix">
+                <span class="gc-input-prefix">₹</span>
+                <input type="number" id="price" class="gc-input" required min="0">
+              </div>
+              <span class="gc-field-error"></span>
+            </div>
+          </div>
 
-</div>
+          <div class="gc-form-group">
+            <label>Condition</label>
+            <div class="gc-chip-group" id="conditionChips" role="radiogroup" aria-label="Condition">
+              <button type="button" class="gc-chip" data-value="New" role="radio" aria-checked="false">New</button>
+              <button type="button" class="gc-chip" data-value="Like New" role="radio" aria-checked="false">Like New</button>
+              <button type="button" class="gc-chip" data-value="Good" role="radio" aria-checked="false">Good</button>
+              <button type="button" class="gc-chip" data-value="Fair" role="radio" aria-checked="false">Fair</button>
+            </div>
+            <!-- kept in sync with the chips above so edit-product.js can read/set it exactly as before -->
+            <select id="condition" class="gc-select" hidden>
+              <option>New</option>
+              <option>Like New</option>
+              <option>Good</option>
+              <option>Fair</option>
+            </select>
+          </div>
 
-<div class="gc-form-group">
+        </div>
+      </div>
 
-<label>Category</label>
+      <!-- ===== Description & location ===== -->
+      <div class="gc-card">
+        <div class="gc-form-section">
 
-<select id="category">
+          <div class="gc-section-head">
+            <span class="gc-step-num">3</span>
+            <h2>Description & location</h2>
+          </div>
+          <p class="gc-section-hint">Help buyers know what they're getting, and where to meet.</p>
 
-<option>Books</option>
+          <div class="gc-form-group">
+            <label for="description">Description <span class="gc-optional">(optional)</span></label>
+            <textarea id="description" class="gc-textarea" rows="5" maxlength="500"></textarea>
+            <div class="gc-field-meta">
+              <span class="gc-char-count" id="descCount">0 / 500</span>
+            </div>
+          </div>
 
-<option>Electronics</option>
+          <div class="gc-form-group">
+            <label for="location">Location <span class="gc-optional">(optional)</span></label>
+            <input type="text" id="location" class="gc-input" placeholder="e.g. Block C hostel">
+            <span class="gc-field-hint">Where you'll hand the item over.</span>
+          </div>
 
-<option>Furniture</option>
+        </div>
+      </div>
 
-<option>Accessories</option>
+      <button type="submit" class="gc-btn-primary gc-btn-submit w-100" id="submitBtn">
+        <span class="gc-btn-text">Update product</span>
+        <span class="gc-spinner-sm"></span>
+      </button>
 
-</select>
+    </form>
 
-</div>
+    <!-- ===== Live preview ===== -->
+    <aside class="gc-sell-preview-panel">
+      <p class="gc-preview-label">Live preview</p>
 
-<div class="gc-form-group">
+      <div class="gc-preview-card">
+        <div class="gc-preview-image-wrap">
+          <img class="gc-preview-image" id="previewImage" src="https://via.placeholder.com/300x220" alt="">
+          <span class="gc-preview-category" id="previewCategory">Books</span>
+        </div>
+        <div class="gc-preview-body">
+          <span class="gc-preview-condition" id="previewCondition">Good</span>
+          <p class="gc-preview-title" id="previewTitle">Engineering Physics Book</p>
+          <div class="gc-preview-location">
+            <i class='bx bx-map'></i>
+            <span id="previewLocation">Location not set</span>
+          </div>
+          <div class="gc-preview-price-row">
+            <span class="gc-preview-price" id="previewPrice">₹0</span>
+          </div>
+        </div>
+      </div>
 
-<label>Price (₹)</label>
+      <p class="gc-preview-hint">This is how your listing will look to other students.</p>
+    </aside>
 
-<input
-type="number"
-id="price"
-required>
+  </div>
 
-</div>
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/edit-product.js"></script>
+  <script>
+    // Dropzone -> opens the hidden file input (edit-product.js owns the change handler)
+    (function () {
+      var dropzone = document.getElementById('dropzone');
+      var fileInput = document.getElementById('productImage');
+      if (!dropzone || !fileInput) return;
 
-<div class="gc-form-group">
+      dropzone.addEventListener('click', function () { fileInput.click(); });
+      dropzone.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+      });
 
-<label>Condition</label>
+      ['dragover', 'dragleave', 'drop'].forEach(function (evt) {
+        dropzone.addEventListener(evt, function (e) {
+          e.preventDefault();
+          dropzone.classList.toggle('is-dragover', evt === 'dragover');
+        });
+      });
+      dropzone.addEventListener('drop', function (e) {
+        if (e.dataTransfer.files.length) {
+          fileInput.files = e.dataTransfer.files;
+          fileInput.dispatchEvent(new Event('change'));
+        }
+      });
+    })();
 
-<select id="condition">
+    // Condition chips <-> hidden select (keeps edit-product.js's #condition contract intact)
+    (function () {
+      var chipGroup = document.getElementById('conditionChips');
+      var select = document.getElementById('condition');
+      if (!chipGroup || !select) return;
 
-<option>New</option>
+      var chips = chipGroup.querySelectorAll('.gc-chip');
 
-<option>Like New</option>
+      function setValue(value) {
+        select.value = value;
+        chips.forEach(function (c) {
+          c.setAttribute('aria-checked', String(c.dataset.value === value));
+        });
+        select.dispatchEvent(new Event('change'));
+      }
 
-<option>Good</option>
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () { setValue(chip.dataset.value); });
+      });
 
-<option>Fair</option>
+      // Keep chips in sync whenever edit-product.js sets #condition.value directly
+      // (e.g. after fetching the existing product)
+      var lastValue = select.value;
+      setInterval(function () {
+        if (select.value !== lastValue) {
+          lastValue = select.value;
+          chips.forEach(function (c) {
+            c.setAttribute('aria-checked', String(c.dataset.value === select.value));
+          });
+          updatePreview();
+        }
+      }, 300);
+    })();
 
-</select>
+    // Character count for description
+    (function () {
+      var textarea = document.getElementById('description');
+      var count = document.getElementById('descCount');
+      if (!textarea || !count) return;
+      function update() { count.textContent = textarea.value.length + ' / 500'; }
+      textarea.addEventListener('input', function () { update(); updatePreview(); });
+      update();
+    })();
 
-</div>
+    // Live preview panel — mirrors current form state
+    function updatePreview() {
+      var title = document.getElementById('title');
+      var category = document.getElementById('category');
+      var price = document.getElementById('price');
+      var condition = document.getElementById('condition');
+      var location = document.getElementById('location');
+      var image = document.getElementById('imagePreview');
 
-<div class="gc-form-group">
+      document.getElementById('previewTitle').textContent = (title && title.value) || 'Untitled product';
+      document.getElementById('previewCategory').textContent = (category && category.value) || '';
+      document.getElementById('previewCondition').textContent = (condition && condition.value) || '';
+      document.getElementById('previewLocation').textContent = (location && location.value) || 'Location not set';
+      document.getElementById('previewPrice').textContent = '₹' + ((price && price.value) || '0');
+      if (image && image.src) document.getElementById('previewImage').src = image.src;
+    }
 
-<label>Description</label>
+    ['title', 'category', 'price', 'location'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', updatePreview);
+      if (el) el.addEventListener('change', updatePreview);
+    });
 
-<textarea
-id="description"
-rows="5"></textarea>
-
-</div>
-
-<div class="gc-form-group">
-
-<label>Location</label>
-
-<input
-type="text"
-id="location">
-
-</div>
-
-<div class="gc-action-buttons">
-
-<button
-type="submit"
-class="gc-btn gc-btn-primary">
-
-Update Product
-
-</button>
-
-<a
-href="dashboard.html"
-class="gc-btn gc-btn-secondary">
-
-Cancel
-
-</a>
-
-</div>
-
-</form>
-
-</main>
-
-<script src="../js/utils.js"></script>
-<script src="../js/api.js"></script>
-<script src="../js/edit-product.js"></script>
-
+    // Initial paint once edit-product.js has populated the form
+    window.addEventListener('load', updatePreview);
+  </script>
 </body>
-
 </html>

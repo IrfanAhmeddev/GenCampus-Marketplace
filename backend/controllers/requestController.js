@@ -58,8 +58,12 @@ exports.createRequest = async (req, res) => {
             ])
             .select();
 
-        if (error) throw error;
-
+    if (error) {
+    console.log("========== SUPABASE INSERT ERROR ==========");
+    console.log(error);
+    console.log("===========================================");
+    throw error;
+}
         res.status(201).json({
 
             success: true,
@@ -70,17 +74,19 @@ exports.createRequest = async (req, res) => {
 
     }
 
-    catch (err) {
+ catch (err) {
 
-        res.status(500).json({
+    console.log("========== REQUEST CONTROLLER ERROR ==========");
+    console.log(err);
+    console.log("==============================================");
 
-            success: false,
-            message: "Failed to create request.",
-            error: err.message
+    res.status(500).json({
+        success: false,
+        message: "Failed to create request.",
+        error: err.message
+    });
 
-        });
-
-    }
+}
 
 };
 
@@ -126,6 +132,184 @@ exports.getAllRequests = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Failed to fetch requests.",
+            error: err.message
+        });
+
+    }
+
+};
+
+// ==========================================
+// Get My Purchases
+// GET /api/v1/requests/my-purchases
+// -----------------------------------------
+// No separate "purchases" table — a purchase
+// is just a request the current user made as
+// a buyer that the seller has accepted.
+// ==========================================
+exports.getMyPurchases = async (req, res) => {
+
+    try {
+
+        const buyer_id = req.user.id;
+
+        const { data, error } = await supabase
+            .from("requests")
+            .select(`
+                *,
+                product:products!requests_product_id_fkey(
+                    id,
+                    title,
+                    price,
+                    image_url
+                ),
+                seller:profiles!requests_seller_id_fkey(
+                    id,
+                    full_name,
+                    email
+                )
+            `)
+            .eq("buyer_id", buyer_id)
+            .eq("status", "accepted")
+            .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        res.status(200).json({
+            success: true,
+            count: data.length,
+            data
+        });
+
+    } catch (err) {
+
+        console.log("========== GET MY PURCHASES ERROR ==========");
+        console.log(err);
+        console.log("==============================================");
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch purchases.",
+            error: err.message
+        });
+
+    }
+
+};
+
+// ==========================================
+// Accept Request
+// PATCH /api/v1/requests/:id/accept
+// ==========================================
+exports.acceptRequest = async (req, res) => {
+
+    try {
+
+        const seller_id = req.user.id;
+        const { id } = req.params;
+
+        // Get Request (must belong to this seller)
+        const { data: request, error: requestError } = await supabase
+            .from("requests")
+            .select("*")
+            .eq("id", id)
+            .eq("seller_id", seller_id)
+            .single();
+
+        if (requestError || !request) {
+
+            return res.status(404).json({
+                success: false,
+                error: "Request not found."
+            });
+
+        }
+
+        // Mark request as accepted
+        const { error: updateRequestError } = await supabase
+            .from("requests")
+            .update({ status: "accepted" })
+            .eq("id", id);
+
+        if (updateRequestError) throw updateRequestError;
+
+        // Mark product as sold
+        const { error: updateProductError } = await supabase
+            .from("products")
+            .update({ status: "sold" })
+            .eq("id", request.product_id);
+
+        if (updateProductError) throw updateProductError;
+
+        res.status(200).json({
+            success: true,
+            message: "Request accepted."
+        });
+
+    } catch (err) {
+
+        console.log("========== ACCEPT REQUEST ERROR ==========");
+        console.log(err);
+        console.log("===========================================");
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to accept request.",
+            error: err.message
+        });
+
+    }
+
+};
+
+// ==========================================
+// Reject Request
+// PATCH /api/v1/requests/:id/reject
+// ==========================================
+exports.rejectRequest = async (req, res) => {
+
+    try {
+
+        const seller_id = req.user.id;
+        const { id } = req.params;
+
+        const { data: request, error: requestError } = await supabase
+            .from("requests")
+            .select("*")
+            .eq("id", id)
+            .eq("seller_id", seller_id)
+            .single();
+
+        if (requestError || !request) {
+
+            return res.status(404).json({
+                success: false,
+                error: "Request not found."
+            });
+
+        }
+
+        const { error: updateError } = await supabase
+            .from("requests")
+            .update({ status: "rejected" })
+            .eq("id", id);
+
+        if (updateError) throw updateError;
+
+        res.status(200).json({
+            success: true,
+            message: "Request rejected."
+        });
+
+    } catch (err) {
+
+        console.log("========== REJECT REQUEST ERROR ==========");
+        console.log(err);
+        console.log("===========================================");
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to reject request.",
             error: err.message
         });
 

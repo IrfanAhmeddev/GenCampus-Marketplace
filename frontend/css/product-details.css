@@ -4,38 +4,54 @@
 ========================================== */
 
 /* ==========================
-Header
+Breadcrumb strip
+(sits inside the shared .gc-filters bar,
+ same pattern as the filters row on products.html)
 ========================== */
 
-.gc-header{
+.gc-filters--slim{
 
-    background:var(--color-surface,#FFFFFF);
+    padding:14px 24px;
 
-    box-shadow:var(--shadow);
+    gap:10px;
 
-    padding:20px 0;
-
-}
-
-.gc-header h1{
-
-    margin-top:15px;
-
-    font-size:32px;
-
-    color:var(--color-brand,#4F46E5);
+    align-items:center;
 
 }
 
-.gc-back-btn{
+.gc-back-link{
 
-    display:inline-block;
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
 
     color:var(--color-brand,#4F46E5);
+
+    text-decoration:none;
 
     font-weight:600;
 
-    margin-bottom:10px;
+}
+
+.gc-back-link:hover{
+
+    text-decoration:underline;
+
+}
+
+.gc-breadcrumb-sep{
+
+    color:#9CA3AF;
+
+}
+
+.gc-breadcrumb-current{
+
+    color:#4B5563;
+
+    font-weight:500;
 
 }
 
@@ -63,6 +79,8 @@ Image
 
 .gc-product-image{
 
+    position:relative;
+
     background:var(--color-surface,#FFFFFF);
 
     border-radius:12px;
@@ -83,6 +101,18 @@ Image
 
 }
 
+.gc-badge--overlay{
+
+    position:absolute;
+
+    top:16px;
+
+    left:16px;
+
+    z-index:2;
+
+}
+
 /* ==========================
 Information
 ========================== */
@@ -96,6 +126,32 @@ Information
     padding:30px;
 
     box-shadow:var(--shadow);
+
+}
+
+.gc-product-info-header{
+
+    margin-bottom:5px;
+
+}
+
+.gc-tag{
+
+    display:inline-block;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    padding:4px 12px;
+
+    border-radius:999px;
+
+    background:#EEF2FF;
+
+    color:var(--color-brand,#4F46E5);
+
+    margin-bottom:12px;
 
 }
 
@@ -119,19 +175,65 @@ Information
 
 }
 
-.gc-meta{
+/* ==========================
+Meta row (category / condition)
+========================== */
+
+.gc-meta-row{
+
+    display:flex;
+
+    gap:32px;
 
     margin:25px 0;
 
 }
 
-.gc-meta p{
+.gc-meta-item{
 
-    margin-bottom:12px;
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:10px;
 
 }
 
-.gc-product-info hr{
+.gc-meta-item i{
+
+    font-size:20px;
+
+    color:var(--color-brand,#4F46E5);
+
+    margin-top:2px;
+
+}
+
+.gc-meta-label{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#9CA3AF;
+
+    text-transform:uppercase;
+
+    letter-spacing:0.03em;
+
+}
+
+.gc-meta-value{
+
+    display:block;
+
+    font-weight:600;
+
+    color:#111827;
+
+}
+
+.gc-divider{
 
     margin:25px 0;
 
@@ -141,17 +243,37 @@ Information
 
 }
 
-.gc-product-info h3{
+/* ==========================
+Info blocks (seller / description)
+========================== */
+
+.gc-info-block h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
 
     margin-bottom:15px;
 
 }
 
-.gc-product-info p{
+.gc-info-block h3 i{
+
+    color:var(--color-brand,#4F46E5);
+
+    font-size:20px;
+
+}
+
+.gc-info-block p{
 
     color:#4B5563;
 
     line-height:1.7;
+
+    margin-bottom:12px;
 
 }
 
@@ -162,6 +284,14 @@ Request Button
 .gc-request-btn{
 
     width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
 
     margin-top:30px;
 
@@ -187,12 +317,6 @@ grid-template-columns:1fr;
 
 @media(max-width:600px){
 
-.gc-header h1{
-
-font-size:26px;
-
-}
-
 .gc-product-info{
 
 padding:20px;
@@ -208,6 +332,14 @@ font-size:26px;
 .gc-price{
 
 font-size:28px;
+
+}
+
+.gc-meta-row{
+
+gap:20px;
+
+flex-wrap:wrap;
 
 }
 

@@ -23,64 +23,7 @@ const emptyStateClearBtn = document.getElementById("emptyStateClear");
 // Sample data
 // (In production this would come from api.js / your backend)
 // ------------------------------
-const products = [
-  {
-    id: 1,
-    title: "Engineering Physics Volume I (Latest Edition)",
-    price: 450,
-    originalPrice: 700,
-    category: "Books",
-    status: "Available",
-    condition: "good",
-    rating: 4,
-    reviewCount: 12,
-    seller: "Aditi R.",
-    postedDaysAgo: 2,
-    image: "../assets/laptop.jpg"
-  },
-  {
-    id: 2,
-    title: "Dell Inspiron 15 — Core i5, 8GB RAM",
-    price: 25000,
-    originalPrice: null,
-    category: "Electronics",
-    status: "Sold",
-    condition: "good",
-    rating: 5,
-    reviewCount: 4,
-    seller: "Rohan K.",
-    postedDaysAgo: 9,
-    image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&auto=format&fit=crop"
-  },
-  {
-    id: 3,
-    title: "Scientific Calculator — Casio fx-991ES",
-    price: 900,
-    originalPrice: 1200,
-    category: "Electronics",
-    status: "Available",
-    condition: "new",
-    rating: 5,
-    reviewCount: 8,
-    seller: "Meera S.",
-    postedDaysAgo: 1,
-    image: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620?w=500&auto=format&fit=crop"
-  },
-  {
-    id: 4,
-    title: "Study Desk Chair, adjustable height",
-    price: 1800,
-    originalPrice: null,
-    category: "Furniture",
-    status: "Available",
-    condition: "fair",
-    rating: 3,
-    reviewCount: 6,
-    seller: "Vikram T.",
-    postedDaysAgo: 5,
-    image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=500&auto=format&fit=crop"
-  }
-];
+let products = [];
 
 // Keep a mutable set of liked product IDs, persisted locally.
 const WISHLIST_KEY = "gc-wishlist";
@@ -90,6 +33,58 @@ function saveWishlist() {
   localStorage.setItem(WISHLIST_KEY, JSON.stringify(Array.from(wishlist)));
 }
 
+
+// =========================================
+// Load Products from Backend
+// =========================================
+
+async function loadProducts() {
+  try {
+
+    renderSkeletons(4);
+
+    const response = await apiRequest(API_ENDPOINTS.products);
+
+    products = response.data.map(product => ({
+
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      originalPrice: null,
+      category: product.category,
+
+      // Backend sends "available" / "sold"
+      status: product.status,
+
+      condition: "good",
+
+      rating: 5,
+      reviewCount: 0,
+
+      seller: "Campus Seller",
+
+      postedDaysAgo: 0,
+
+      image: product.image_url ||
+        "https://via.placeholder.com/400x300?text=No+Image"
+
+    }));
+
+    applyFilters();
+
+  } catch (error) {
+
+    console.error("Error loading products:", error);
+
+    productsGrid.innerHTML = `
+      <div class="error">
+        Failed to load products.
+      </div>
+    `;
+
+  }
+}
 // ------------------------------
 // Helpers
 // ------------------------------
@@ -164,7 +159,7 @@ function renderProducts(data) {
 
   productsGrid.innerHTML = data
     .map((product) => {
-      const isSold = product.status === "Sold";
+     const isSold = product.status.toLowerCase() === "sold";
       const discount = discountPercent(product.price, product.originalPrice);
       const isLiked = wishlist.has(product.id);
 
@@ -207,9 +202,14 @@ function renderProducts(data) {
               ${discount ? `<span class="discount-tag">${discount}% off</span>` : ""}
             </div>
 
-            <button class="btn-action" ${isSold ? "disabled" : ""}>
-              ${isSold ? "Out of stock" : "View details"}
-            </button>
+           <button
+    class="btn-action view-details-btn"
+    data-id="${product.id}"
+    ${isSold ? "disabled" : ""}>
+
+    ${isSold ? "Out of stock" : "View details"}
+
+</button>
           </div>
         </div>
       `;
@@ -290,7 +290,7 @@ productsGrid.addEventListener("click", (event) => {
   const wishlistBtn = event.target.closest(".wishlist-btn");
   if (!wishlistBtn) return;
 
-  const id = Number(wishlistBtn.dataset.id);
+const id = wishlistBtn.dataset.id;
   if (wishlist.has(id)) {
     wishlist.delete(id);
   } else {
@@ -300,13 +300,24 @@ productsGrid.addEventListener("click", (event) => {
   applyFilters();
 });
 
+productsGrid.addEventListener("click", (event) => {
+
+    const detailsBtn = event.target.closest(".view-details-btn");
+
+    if (!detailsBtn) return;
+
+    const productId = detailsBtn.dataset.id;
+
+    window.location.href =
+        `product-details.html?id=${productId}`;
+
+});
+
 // ------------------------------
 // Initial load — brief skeleton for perceived performance,
 // then render real data.
 // ------------------------------
-renderSkeletons(4);
-setTimeout(applyFilters, 350);
-
+loadProducts();
 function starString(rating) {
   let out = '<span class="stars">';
   for (let i = 1; i <= 5; i++) {

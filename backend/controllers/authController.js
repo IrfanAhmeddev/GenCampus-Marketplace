@@ -1,4 +1,4 @@
-const supabase = require("../config/supabaseClient");
+const supabase = require("../config/supabaseAdmin");
 
 /**
  * ==========================================
@@ -42,18 +42,28 @@ exports.signup = async (req, res) => {
 
         const user = authData.user;
 
+        console.log("========== AUTH USER CREATED ==========");
+        console.log(user);
+        console.log("=======================================");
+
         // Insert Profile
-        const { error: profileError } = await supabase
-            .from("profiles")
-            .insert([
-                {
-                    id: user.id,
-                    full_name,
-                    email,
-                    phone: phone || null,
-                    college_id: college_id || null
-                }
-            ]);
+      const { data: profileData, error: profileError } = await supabase
+    .from("profiles")
+    .insert([
+        {
+            id: user.id,
+            full_name,
+            email,
+            phone: phone || null,
+            college_id: college_id || null
+        }
+    ])
+    .select();
+
+console.log("========== PROFILE INSERT ==========");
+console.log(profileData);
+console.log(profileError);
+console.log("====================================");
 
         if (profileError) {
             throw profileError;
@@ -70,13 +80,18 @@ exports.signup = async (req, res) => {
 
     } catch (err) {
 
-        res.status(500).json({
-            success: false,
-            error: err.message
-        });
+    console.log("========== SIGNUP ERROR ==========");
+    console.log(err);
+    console.log("==================================");
+
+    res.status(500).json({
+        success: false,
+        error: err.message
+    });
+
+}
 
     }
-};
 
 /**
  * ==========================================
@@ -172,13 +187,21 @@ exports.getMe = async (req, res) => {
 
     } catch (err) {
 
-        return res.status(500).json({
-
+    if (err.code === "email_exists") {
+        return res.status(409).json({
             success: false,
-            error: err.message
-
+            error: "Email already registered."
         });
-
     }
+
+    console.log(err);
+
+    return res.status(500).json({
+        success: false,
+        error: err.message
+    });
+
+}
+    
 
 };

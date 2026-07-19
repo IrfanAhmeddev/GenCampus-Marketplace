@@ -23,22 +23,32 @@ const API_ENDPOINTS = {
 // =========================================
 // Generic API Request Function
 // =========================================
+// =========================================
+// Generic API Request Function
+// =========================================
 
 async function apiRequest(endpoint, options = {}) {
 
     const token = localStorage.getItem("token");
 
+    const headers = {};
+
+    // Add token if available
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+
+    // Only add JSON header if body is NOT FormData
+    if (!(options.body instanceof FormData)) {
+        headers["Content-Type"] = "application/json";
+    }
+
     const config = {
-
+        ...options,
         headers: {
-            "Content-Type": "application/json",
-            ...(token && {
-                Authorization: `Bearer ${token}`
-            })
-        },
-
-        ...options
-
+            ...headers,
+            ...(options.headers || {})
+        }
     };
 
     try {
@@ -51,9 +61,11 @@ async function apiRequest(endpoint, options = {}) {
         const data = await response.json();
 
         if (!response.ok) {
-
-            throw new Error(data.message || "Something went wrong.");
-
+            throw new Error(
+                data.error ||
+                data.message ||
+                "Something went wrong."
+            );
         }
 
         return data;
@@ -61,9 +73,7 @@ async function apiRequest(endpoint, options = {}) {
     } catch (error) {
 
         console.error("API Error:", error);
-
         throw error;
 
     }
-
 }

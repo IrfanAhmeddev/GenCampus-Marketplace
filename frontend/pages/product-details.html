@@ -1,174 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | GenCampus</title>
 
-    <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/products.css">
+  <link rel="stylesheet" href="../css/product-details.css">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Product Details | GenCampus Marketplace</title>
-
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/product-details.css">
-    <div id="navbar"></div>
-
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
-
 <body>
 
-    <!-- Header -->
+  <!-- ========================= -->
+  <!-- NAVBAR -->
+  <!-- ========================= -->
+  <header class="gc-navbar">
+    <div class="gc-navbar-inner">
 
-    <header class="gc-header">
+      <a href="products.html" class="gc-brand">
+        <span class="gc-brand-mark">GC</span>
+        <span class="gc-brand-name">GenCampus</span>
+      </a>
 
-        <div class="gc-container">
+      <nav class="gc-nav-links" aria-label="Primary">
+        <a href="products.html" class="gc-nav-link">Home</a>
+        <a href="products.html#filtersSection" class="gc-nav-link">Categories</a>
+        <a href="sell.html" class="gc-nav-link">Sell</a>
+      </nav>
 
-            <a href="products.html" class="gc-back-btn">
-                ← Back to Marketplace
-            </a>
-
-            <h1>Product Details</h1>
-
+      <div class="gc-navbar-actions">
+        <div class="search-wrapper gc-navbar-search">
+          <i class='bx bx-search' aria-hidden="true"></i>
+          <input type="text" id="searchInput" placeholder="Search the marketplace..." aria-label="Search products">
         </div>
 
-    </header>
+        <div class="gc-user-menu">
+          <button class="gc-avatar-btn" id="avatarBtn" aria-haspopup="true" aria-expanded="false">
+            <span class="gc-avatar">AK</span>
+            <i class='bx bx-chevron-down'></i>
+          </button>
 
-    <!-- Main Content -->
+          <div class="gc-avatar-dropdown" id="avatarDropdown" hidden>
+            <a href="dashboard.html" class="gc-dropdown-item">
+              <i class='bx bx-grid-alt'></i> My dashboard
+            </a>
+            <a href="#" class="gc-dropdown-item">
+              <i class='bx bx-heart'></i> Wishlist
+            </a>
+            <a href="#" class="gc-dropdown-item">
+              <i class='bx bx-cog'></i> Settings
+            </a>
+            <div class="gc-dropdown-divider"></div>
+            <a href="login.html" class="gc-dropdown-item gc-dropdown-item--danger">
+              <i class='bx bx-log-out'></i> Log out
+            </a>
+          </div>
+        </div>
+      </div>
 
-    <main class="gc-container">
+    </div>
+  </header>
 
-        <section class="gc-product-layout">
+  <!-- ========================= -->
+  <!-- BREADCRUMB / SUB-HEADER -->
+  <!-- ========================= -->
+  <section class="gc-filters gc-filters--slim">
+    <a href="products.html" class="gc-back-link">
+      <i class='bx bx-arrow-back'></i> Back to Marketplace
+    </a>
+    <span class="gc-breadcrumb-sep">/</span>
+    <span class="gc-breadcrumb-current" id="breadcrumbTitle">Product details</span>
+  </section>
 
-            <!-- Product Image -->
+  <!-- ========================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ========================= -->
+  <main class="container">
 
-            <div class="gc-product-image">
+    <section class="gc-product-layout">
 
-                <img
-                    id="productImage"
-                    src="https://via.placeholder.com/600x450"
-                    alt="Product">
+      <!-- Product Image -->
+      <div class="gc-product-image">
+        <span id="productStatus" class="gc-badge gc-badge--overlay"></span>
+        <img id="productImage" src="https://via.placeholder.com/600x450" alt="Product">
+      </div>
 
+      <!-- Product Information -->
+      <div class="gc-product-info">
+
+        <div class="gc-product-info-header">
+          <span class="gc-tag" id="productCategoryTag">Books</span>
+          <h2 id="productTitle">Engineering Physics Book</h2>
+          <h3 id="productPrice" class="gc-price">₹450</h3>
+        </div>
+
+        <div class="gc-meta gc-meta-row">
+          <div class="gc-meta-item">
+            <i class='bx bx-category'></i>
+            <div>
+              <span class="gc-meta-label">Category</span>
+              <span id="productCategory" class="gc-meta-value">Books</span>
             </div>
+          </div>
 
-            <!-- Product Information -->
-
-            <div class="gc-product-info">
-
-                <span class="gc-badge gc-badge-success">
-
-                    Available
-
-                </span>
-
-                <h2 id="productTitle">
-
-                    Engineering Physics Book
-
-                </h2>
-
-                <h3
-                    id="productPrice"
-                    class="gc-price">
-
-                    ₹450
-
-                </h3>
-
-                <div class="gc-meta">
-
-                    <p>
-
-                        <strong>Category:</strong>
-
-                        <span id="productCategory">
-
-                            Books
-
-                        </span>
-
-                    </p>
-
-                    <p>
-
-                        <strong>Condition:</strong>
-
-                        <span id="productCondition">
-
-                            Good
-
-                        </span>
-
-                    </p>
-
-                </div>
-
-                <hr>
-
-                <h3>
-
-                    Seller Information
-
-                </h3>
-
-                <p>
-
-                    <strong>Name:</strong>
-
-                    <span id="sellerName">
-
-                        John Doe
-
-                    </span>
-
-                </p>
-
-                <p>
-
-                    <strong>Department:</strong>
-
-                    <span id="sellerDepartment">
-
-                        Computer Science
-
-                    </span>
-
-                </p>
-
-                <hr>
-
-                <h3>
-
-                    Description
-
-                </h3>
-
-                <p id="productDescription">
-
-                    Engineering Physics textbook for second-year students.
-                    Good condition with minimal markings.
-
-                </p>
-
-                <button
-                    class="gc-btn gc-btn-primary gc-request-btn">
-
-                    Request Product
-
-                </button>
-
+          <div class="gc-meta-item">
+            <i class='bx bx-shield-quarter'></i>
+            <div>
+              <span class="gc-meta-label">Condition</span>
+              <span id="productCondition" class="gc-meta-value">Good</span>
             </div>
+          </div>
+        </div>
 
-        </section>
+        <hr class="gc-divider">
 
-    </main>
+        <div class="gc-info-block">
+          <h3><i class='bx bx-user-circle'></i> Seller Information</h3>
+          <p><strong>Name:</strong> <span id="sellerName">John Doe</span></p>
+          <p><strong>Department:</strong> <span id="sellerDepartment">Computer Science</span></p>
+        </div>
 
-    <script src="../js/utils.js"></script>
-    <script src="../js/api.js"></script>
-    <script src="../js/product-details.js"></script>
+        <hr class="gc-divider">
 
+        <div class="gc-info-block">
+          <h3><i class='bx bx-detail'></i> Description</h3>
+          <p id="productDescription">
+            Engineering Physics textbook for second-year students.
+            Good condition with minimal markings.
+          </p>
+        </div>
+
+        <button class="gc-btn gc-btn-primary gc-request-btn">
+          <i class='bx bx-paper-plane'></i> Request Product
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/product-details.js"></script>
+  <script>
+    // Avatar dropdown — same self-contained pattern used on products.html
+    (function () {
+      var btn = document.getElementById('avatarBtn');
+      var menu = document.getElementById('avatarDropdown');
+      if (!btn || !menu) return;
+
+      function closeMenu() {
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      }
+
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = !menu.hidden;
+        menu.hidden = isOpen;
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) closeMenu();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
 </body>
-
 </html>

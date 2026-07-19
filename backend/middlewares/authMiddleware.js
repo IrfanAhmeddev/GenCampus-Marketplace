@@ -13,7 +13,13 @@ exports.protect = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    const { data, error } = await supabase.auth.getUser(token);
+   const { data, error } = await supabase.auth.getUser(token);
+
+console.log("========== AUTH DEBUG ==========");
+console.log("Received Token:", token);
+console.log("Supabase User:", data.user);
+console.log("Supabase Error:", error);
+console.log("===============================");
 
     if (error || !data.user) {
       return res.status(401).json({

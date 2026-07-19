@@ -1,20 +1,19 @@
 /* ==========================================
    GenCampus Marketplace
-   Sell Product Page — Zoho-inspired
-   White + Green, Inter, calm hierarchy
+   Sell Product Page — White + Indigo, Inter, calm hierarchy
 ========================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
 :root {
-    --primary: #1F9D55;
-    --primary-dark: #17803D;
-    --primary-soft: #EAFBF1;
+    --primary: #4F46E5;
+    --primary-dark: #4338CA;
+    --primary-soft: #EEF2FF;
 
     --surface: #FFFFFF;
-    --surface-muted: #FAFBFA;
-    --border: #E9ECEB;
-    --border-hover: #D7DBD9;
+    --surface-muted: #FAFBFC;
+    --border: #E9EAEC;
+    --border-hover: #D7D9DD;
 
     --text-main: #1F2937;
     --text-muted: #6B7280;
@@ -22,11 +21,11 @@
 
     --sell-danger: #E11D48;
     --sell-danger-bg: #FEF1F3;
-    --sell-success: #1F9D55;
-    --sell-success-bg: #EAFBF1;
+    --sell-success: #4F46E5;
+    --sell-success-bg: #EEF2FF;
 
-    --shadow: 0 1px 2px rgba(16,24,22,.04);
-    --shadow-md: 0 6px 16px rgba(16,24,22,.06);
+    --shadow: 0 1px 2px rgba(17,17,26,.04);
+    --shadow-md: 0 6px 16px rgba(17,17,26,.06);
 
     --transition: all .2s cubic-bezier(.4,0,.2,1);
 }

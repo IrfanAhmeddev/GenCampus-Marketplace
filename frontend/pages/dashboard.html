@@ -10,40 +10,89 @@
 <link rel="stylesheet" href="../css/components.css">
 <link rel="stylesheet" href="../css/dashboard.css">
 
-<!-- Lucide icon library -->
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+<!-- Boxicons -->
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 <body>
 
 <div id="overlay" class="gc-overlay"></div>
 
-<header class="gc-header">
+<!-- ========================= -->
+<!-- NAVBAR (same as products.html) -->
+<!-- ========================= -->
+<header class="gc-navbar">
+  <div class="gc-navbar-inner">
+
+    <a href="products.html" class="gc-brand">
+      <span class="gc-brand-mark">GC</span>
+      <span class="gc-brand-name">GenCampus</span>
+    </a>
+
+    <nav class="gc-nav-links" aria-label="Primary">
+      <a href="products.html" class="gc-nav-link">Home</a>
+      <a href="products.html#filtersSection" class="gc-nav-link">Categories</a>
+      <a href="sell.html" class="gc-nav-link">Sell</a>
+    </nav>
+
+    <div class="gc-navbar-actions">
+      <div class="gc-user-menu">
+        <button class="gc-avatar-btn" id="avatarBtn" aria-haspopup="true" aria-expanded="false">
+          <span class="gc-avatar">AK</span>
+          <i class='bx bx-chevron-down'></i>
+        </button>
+
+        <div class="gc-avatar-dropdown" id="avatarDropdown" hidden>
+          <a href="dashboard.html" class="gc-dropdown-item is-active">
+            <i class='bx bx-grid-alt'></i> My dashboard
+          </a>
+          <a href="#" class="gc-dropdown-item">
+            <i class='bx bx-heart'></i> Wishlist
+          </a>
+          <a href="#" class="gc-dropdown-item">
+            <i class='bx bx-cog'></i> Settings
+          </a>
+          <div class="gc-dropdown-divider"></div>
+          <a href="login.html" class="gc-dropdown-item gc-dropdown-item--danger">
+            <i class='bx bx-log-out'></i> Log out
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ========================= -->
+<!-- DASHBOARD PAGE HEADER -->
+<!-- ========================= -->
+<header class="gc-page-header">
   <div class="gc-container">
     <div class="gc-dashboard-top">
       <div class="gc-header-title">
-        <h1>Seller Dashboard</h1>
+        <span class="gc-header-eyebrow">Seller tools</span>
+        <h1>Your dashboard</h1>
         <p>Manage your marketplace listings</p>
       </div>
 
       <div class="gc-dashboard-actions">
         <div class="gc-search">
-          <i data-lucide="search" class="gc-search-icon"></i>
+          <i class='bx bx-search gc-search-icon'></i>
           <input type="text" id="searchInput" placeholder="Search your products...">
         </div>
 
         <button id="requestBtn" class="gc-icon-btn" aria-label="Notifications">
-          <i data-lucide="bell"></i>
+          <i class='bx bx-bell'></i>
           <span class="gc-badge">3</span>
         </button>
 
         <button id="purchaseBtn" class="gc-icon-btn" aria-label="Purchases">
-          <i data-lucide="shopping-cart"></i>
+          <i class='bx bx-cart'></i>
           <span class="gc-badge">2</span>
         </button>
 
         <a href="sell.html" class="gc-btn gc-btn-primary">
-          <i data-lucide="plus"></i>
+          <i class='bx bx-plus'></i>
           <span>Add product</span>
         </a>
       </div>
@@ -56,7 +105,7 @@
   <section class="gc-stats">
     <div class="gc-stat-card">
       <div class="gc-stat-icon gc-stat-icon--total">
-        <i data-lucide="package"></i>
+        <i class='bx bx-package'></i>
       </div>
       <div>
         <h2 id="totalProducts">0</h2>
@@ -66,7 +115,7 @@
 
     <div class="gc-stat-card">
       <div class="gc-stat-icon gc-stat-icon--available">
-        <i data-lucide="circle-check"></i>
+        <i class='bx bx-check-circle'></i>
       </div>
       <div>
         <h2 id="availableProducts">0</h2>
@@ -76,7 +125,7 @@
 
     <div class="gc-stat-card">
       <div class="gc-stat-icon gc-stat-icon--sold">
-        <i data-lucide="badge-indian-rupee"></i>
+        <i class='bx bx-rupee'></i>
       </div>
       <div>
         <h2 id="soldProducts">0</h2>
@@ -105,11 +154,11 @@
 
     <!-- Empty state: toggle visibility from JS when dashboardTable has no rows -->
     <div id="emptyState" class="gc-empty-state" hidden>
-      <i data-lucide="package-open"></i>
+      <i class='bx bx-package gc-empty-icon'></i>
       <h4>No products yet</h4>
       <p>List your first item and it'll show up here.</p>
       <a href="sell.html" class="gc-btn gc-btn-primary">
-        <i data-lucide="plus"></i>
+        <i class='bx bx-plus'></i>
         <span>Add product</span>
       </a>
     </div>
@@ -120,7 +169,7 @@
   <div class="gc-drawer-header">
     <h2 id="drawerTitle">Notifications</h2>
     <button id="closeDrawer" aria-label="Close panel">
-      <i data-lucide="x"></i>
+      <i class='bx bx-x'></i>
     </button>
   </div>
   <div id="drawerContent" class="gc-drawer-content"></div>
@@ -130,10 +179,32 @@
 <script src="../js/api.js"></script>
 <script src="../js/dashboard.js"></script>
 <script>
-  // Render Lucide icons after the library loads
-  document.addEventListener('DOMContentLoaded', () => {
-    if (window.lucide) lucide.createIcons();
-  });
+  // Avatar dropdown — same self-contained pattern as products.html
+  (function () {
+    var btn = document.getElementById('avatarBtn');
+    var menu = document.getElementById('avatarDropdown');
+    if (!btn || !menu) return;
+
+    function closeMenu() {
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = !menu.hidden;
+      menu.hidden = isOpen;
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) closeMenu();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
+  })();
 </script>
 </body>
 </html>

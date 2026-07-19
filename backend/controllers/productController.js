@@ -32,6 +32,42 @@ exports.getAllProducts = async (req, res) => {
 };
 
 // ==========================================
+// Get My Products
+// GET /api/v1/products/my-products
+// ==========================================
+exports.getMyProducts = async (req, res) => {
+
+    try {
+
+        const seller_id = req.user.id;
+
+        const { data, error } = await supabase
+            .from("products")
+            .select("*")
+            .eq("seller_id", seller_id)
+            .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        res.status(200).json({
+            success: true,
+            count: data.length,
+            data
+        });
+
+    } catch (err) {
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch your products",
+            error: err.message
+        });
+
+    }
+
+};
+
+// ==========================================
 // Get Product By ID
 // GET /api/v1/products/:id
 // ==========================================
@@ -80,18 +116,37 @@ exports.createProduct = async (req, res) => {
             title,
             description,
             price,
-            category,
-            image_url
+            category
         } = req.body;
 
-        // Validation
         if (!title || !price || !category) {
-
             return res.status(400).json({
                 success: false,
                 message: "Title, Price and Category are required."
             });
+        }
 
+        let image_url = null;
+
+        // Upload image to Supabase Storage
+        if (req.file) {
+
+            const fileName = `${Date.now()}-${req.file.originalname}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from("product-images") // Change if your bucket has a different name
+                .upload(fileName, req.file.buffer, {
+                    contentType: req.file.mimetype,
+                    upsert: false
+                });
+
+            if (uploadError) throw uploadError;
+
+            const { data: publicUrlData } = supabase.storage
+                .from("product-images")
+                .getPublicUrl(fileName);
+
+            image_url = publicUrlData.publicUrl;
         }
 
         const { data, error } = await supabase
@@ -119,6 +174,8 @@ exports.createProduct = async (req, res) => {
 
     } catch (err) {
 
+        console.error(err);
+
         res.status(500).json({
             success: false,
             message: "Failed to create product",
@@ -126,7 +183,6 @@ exports.createProduct = async (req, res) => {
         });
 
     }
-    console.log("Authenticated User ID:", req.user.id);
 
 };
 

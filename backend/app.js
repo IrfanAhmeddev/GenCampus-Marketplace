@@ -1,12 +1,24 @@
 const express = require("express");
 const cors = require("cors");
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5500",
+      "http://127.0.0.1:5500",
+      "https://gencampus.netlify.app"
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
 const errorHandler = require("./middlewares/errorHandler");
 const routes = require("./routes");
 
 const app = express();
 
-// Middleware
-app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
